@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.android.leacooking.ui.shared.topBar.TopBar
 import com.android.leacooking.ui.home.HomeScreen
+import com.android.leacooking.ui.subcategories.SubCategoriesScreen
 
 enum class Screen(val route: String) {
     HOME("home"),
@@ -33,17 +34,22 @@ fun MainNavigation() {
             Scaffold(
                 topBar = { TopBar() },
             ) { innerPadding ->
-                HomeScreen(modifier = Modifier.padding(innerPadding).background(Color(251,194,181)))
-            }
-        }
-        /*composable(Screen.SUBCATEGORIES.route) {
-            Scaffold(topBar = { TopBar() }) { innerPadding ->
-                SubCategoriesScreen(
-                    Modifier.padding(innerPadding),
+                HomeScreen(
+                    modifier = Modifier.padding(innerPadding).background(Color(251,194,181)),
                     navController = navController
                 )
             }
         }
+        composable("${Screen.SUBCATEGORIES.route}/{categoryLabel}") { backStackEntry ->
+            val categoryLabel = backStackEntry.arguments?.getString("categoryLabel") ?: ""
+            Scaffold(topBar = { TopBar() }) { innerPadding ->
+                SubCategoriesScreen(
+                    Modifier.padding(innerPadding).background(Color(251,194,181)),
+                    categoryLabel = categoryLabel
+                )
+            }
+        }
+        /*
         composable(Screen.RECIPES.route) {
             Scaffold(topBar = { TopBar() }) { innerPadding ->
                 RecipesScreen(

@@ -72,4 +72,9 @@ dependencies {
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)
     implementation(libs.coil.compose)
+
+    implementation(libs.navigation.compose)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.animation)
 }
