@@ -1,6 +1,7 @@
 package com.android.leacooking.ui.subcategories
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -10,14 +11,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.android.leacooking.ui.planning.components.ImageCard
-import com.android.leacooking.ui.planning.viewmodel.SubCategoriesViewModel
+import androidx.navigation.NavController
+import com.android.leacooking.ui.Screen
+import com.android.leacooking.ui.shared.imageCard.ImageCard
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun SubCategoriesScreen(
     modifier: Modifier = Modifier,
     categoryLabel: String,
+    navController: NavController,
     viewModel: SubCategoriesViewModel = hiltViewModel()
 ) {
     LaunchedEffect(categoryLabel) {
@@ -54,6 +57,9 @@ fun SubCategoriesScreen(
                             modifier = Modifier
                                 .size(cardSize)
                                 .padding(5.dp)
+                                .clickable {
+                                    navController.navigate("${Screen.RECIPES.route}/${subCategory.subCategoryLabel}")
+                                },
                         )
                     }
                 }
@@ -61,13 +67,13 @@ fun SubCategoriesScreen(
         }
     }
 }
-
+/*
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
     SubCategoriesScreen(categoryLabel = "Salé")
 }
-
+*/
 @Composable
 fun isLandscape(): Boolean {
     val configuration = LocalConfiguration.current

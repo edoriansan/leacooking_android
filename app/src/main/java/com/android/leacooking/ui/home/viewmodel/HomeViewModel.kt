@@ -1,4 +1,4 @@
-package com.android.leacooking.ui.planning.viewmodel
+package com.android.leacooking.ui.home.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.android.leacooking.data.models.room.Category

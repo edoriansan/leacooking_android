@@ -9,7 +9,7 @@ import com.android.leacooking.data.models.room.Recipe
 @Dao
 interface RecipeDao {
     @Query("""
-        SELECT r.title, r.image_url 
+        SELECT r.id, r.title, r.image_url, r.subCategoryLabel
         FROM recipe r
         WHERE id_subcategory = :subcategoryId
     """)
@@ -18,7 +18,7 @@ interface RecipeDao {
     @Query("""
         SELECT r.* 
         FROM recipe r
-        WHERE id = :id
+        WHERE r.id = :id
     """)
     fun getRecipeById(id: Int): LiveData<Recipe>
 }

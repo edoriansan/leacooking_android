@@ -1,4 +1,4 @@
-package com.android.leacooking.ui.planning.components
+package com.android.leacooking.ui.shared.imageCard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
