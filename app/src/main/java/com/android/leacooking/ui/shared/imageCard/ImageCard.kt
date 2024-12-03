@@ -1,4 +1,4 @@
-package com.android.leacooking.ui.planning.components
+package com.android.leacooking.ui.shared.imageCard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
@@ -21,7 +22,7 @@ import coil.compose.SubcomposeAsyncImageContent
 import com.android.leacooking.ui.theme.customFontFamily
 
 @Composable
-fun ImageCard(imageUrl: String, label: String, modifier: Modifier) {
+fun ImageCard(imageUrl: String, label: String, modifier: Modifier, fontSize: TextUnit = 20.sp) {
     Card(
         modifier = modifier.shadow(8.dp),
         shape = MaterialTheme.shapes.medium,
@@ -69,7 +70,7 @@ fun ImageCard(imageUrl: String, label: String, modifier: Modifier) {
                 Text(
                     text = label.uppercase(),
                     color = Color.White,
-                    fontSize = 20.sp,
+                    fontSize = fontSize,
                     fontFamily = customFontFamily
                 )
             }
