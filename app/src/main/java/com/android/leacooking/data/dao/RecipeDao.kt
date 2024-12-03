@@ -1,31 +1,24 @@
 package com.android.leacooking.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
-import com.android.leacooking.data.models.Recipe
-import kotlinx.coroutines.flow.Flow
+import com.android.leacooking.data.models.custom.RecipeLight
+import com.android.leacooking.data.models.room.Recipe
 
 @Dao
 interface RecipeDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(recipe: Recipe)
+    @Query("""
+        SELECT r.title, r.image_url 
+        FROM recipe r
+        WHERE id_subcategory = :subcategoryId
+    """)
+    fun getRecipeLightBySubcategoryId(subcategoryId: Int): LiveData<List<RecipeLight>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(recipes: List<Recipe>)
-
-    @Update
-    suspend fun update(recipe: Recipe)
-
-    @Delete
-    suspend fun delete(recipe: Recipe)
-
-    @Query("SELECT * from planning WHERE id = :id")
-    fun getPlanning(id: Int): Flow<Recipe>
-
-    @Query("SELECT * from planning ORDER BY datePlanning ASC")
-    fun getAllPlannings(): Flow<List<Recipe>>
+    @Query("""
+        SELECT r.* 
+        FROM recipe r
+        WHERE id = :id
+    """)
+    fun getRecipeById(id: Int): LiveData<Recipe>
 }
