@@ -21,7 +21,7 @@ import androidx.room.PrimaryKey
 data class SubCategory(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Int,
+    val id: Long,
 
     @ColumnInfo(name = "sub_category_label")
     val subCategoryLabel: String,
@@ -30,7 +30,7 @@ data class SubCategory(
     val subCategoryImg: String,
 
     @ColumnInfo(name = "id_category")
-    val categoryId: Int,
+    val categoryId: Long,
 
     val categoryLabel: String // temporary
 )

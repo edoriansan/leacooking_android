@@ -9,8 +9,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SubCategoriesViewModel @Inject constructor() : ViewModel() {
-
-
     // Mock data
     private val subCategoryItems = listOf(
         // Catégorie "Salé"
@@ -130,8 +128,8 @@ class SubCategoriesViewModel @Inject constructor() : ViewModel() {
         )
     )
 
-    fun loadSubCategories(categoryLabel: String) {
-        _subCategories.value = subCategoryItems.filter { it.categoryLabel == categoryLabel }
+    fun loadSubCategories(categoryId: Long) {
+        _subCategories.value = subCategoryItems.filter { it.categoryId == categoryId }
     }
 
     private val _subCategories = MutableStateFlow<List<SubCategory>>(subCategoryItems)

@@ -12,5 +12,6 @@ data class RecipeLight(
     @ColumnInfo(name = "image_url")
     val imageUrl: String,
 
-    val subCategoryLabel: String // temporary
+    @ColumnInfo(name = "id_subcategory")
+    val subCategoryId: Long
 )

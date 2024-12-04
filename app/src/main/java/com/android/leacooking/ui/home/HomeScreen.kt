@@ -38,7 +38,7 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .weight(1f)
                     .clickable {
-                        navController.navigate("${Screen.SUBCATEGORIES.route}/${category.categoryLabel}")
+                        navController.navigate("${Screen.SUBCATEGORIES.route}/${category.id}")
                     },
                 fontSize = 40.sp
             )

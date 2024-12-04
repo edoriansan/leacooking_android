@@ -1,6 +1,7 @@
 package com.android.leacooking.ui.recipes
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,18 +13,19 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.android.leacooking.ui.Screen
 import com.android.leacooking.ui.shared.imageCard.ImageCard
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun RecipesScreen(
     modifier: Modifier = Modifier,
-    subCategoryLabel: String,
-    /*navController: NavController,*/
+    subCategoryId: Long,
+    navController: NavController,
     viewModel: RecipesViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(subCategoryLabel) {
-        viewModel.loadRecipes(subCategoryLabel)
+    LaunchedEffect(subCategoryId) {
+        viewModel.loadRecipes(subCategoryId)
     }
 
     val recipes by viewModel.recipes.collectAsState()
@@ -53,6 +55,9 @@ fun RecipesScreen(
                                 .weight(1f)
                                 .height(cardSize)
                                 .padding(5.dp)
+                                .clickable {
+                                    navController.navigate("${Screen.RECIPE.route}/${recipe.id}")
+                                },
                         )
                     }
                 }

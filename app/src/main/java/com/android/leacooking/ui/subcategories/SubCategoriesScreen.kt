@@ -7,7 +7,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -19,12 +18,12 @@ import com.android.leacooking.ui.shared.imageCard.ImageCard
 @Composable
 fun SubCategoriesScreen(
     modifier: Modifier = Modifier,
-    categoryLabel: String,
+    categoryId: Long,
     navController: NavController,
     viewModel: SubCategoriesViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(categoryLabel) {
-        viewModel.loadSubCategories(categoryLabel)
+    LaunchedEffect(categoryId) {
+        viewModel.loadSubCategories(categoryId)
     }
 
     val subCategories by viewModel.subCategories.collectAsState()
@@ -58,7 +57,7 @@ fun SubCategoriesScreen(
                                 .size(cardSize)
                                 .padding(5.dp)
                                 .clickable {
-                                    navController.navigate("${Screen.RECIPES.route}/${subCategory.subCategoryLabel}")
+                                    navController.navigate("${Screen.RECIPES.route}/${subCategory.id}")
                                 },
                         )
                     }
@@ -71,7 +70,7 @@ fun SubCategoriesScreen(
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    SubCategoriesScreen(categoryLabel = "Salé")
+    SubCategoriesScreen(categoryId = "Salé")
 }
 */
 @Composable

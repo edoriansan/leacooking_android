@@ -22,13 +22,11 @@ data class Recipe(
     val title: String,
 
     @ColumnInfo(name = "persons")
-    val persons: Int,
+    val persons: Long,
 
     @ColumnInfo(name = "image_url")
     val imageUrl: String? = null,
 
     @ColumnInfo(name = "id_subcategory")
-    val subCategoryId: Long,
-
-    val subCategoryLabel: String // temporary
+    val subCategoryId: Long
 )

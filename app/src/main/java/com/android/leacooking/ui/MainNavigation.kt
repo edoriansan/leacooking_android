@@ -6,11 +6,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.android.leacooking.ui.shared.topBar.TopBar
 import com.android.leacooking.ui.home.HomeScreen
+import com.android.leacooking.ui.recipe.RecipeScreen
 import com.android.leacooking.ui.recipes.RecipesScreen
 import com.android.leacooking.ui.subcategories.SubCategoriesScreen
 
@@ -41,34 +44,41 @@ fun MainNavigation() {
                 )
             }
         }
-        composable("${Screen.SUBCATEGORIES.route}/{categoryLabel}") { backStackEntry ->
-            val categoryLabel = backStackEntry.arguments?.getString("categoryLabel") ?: ""
+        composable(
+            route = "${Screen.SUBCATEGORIES.route}/{categoryId}",
+            arguments = listOf(navArgument("categoryId") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val categoryId = backStackEntry.arguments?.getLong("categoryId") ?: 1L
             Scaffold(topBar = { TopBar() }) { innerPadding ->
                 SubCategoriesScreen(
                     Modifier.padding(innerPadding).background(Color(251,194,181)),
-                    categoryLabel = categoryLabel,
+                    categoryId = categoryId,
                     navController = navController
                 )
             }
         }
-        composable("${Screen.RECIPES.route}/{subCategoryLabel}") { backStackEntry ->
-            val subCategoryLabel = backStackEntry.arguments?.getString("subCategoryLabel") ?: ""
+        composable("${Screen.RECIPES.route}/{subCategoryId}",
+            arguments = listOf(navArgument("subCategoryId") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val subCategoryId = backStackEntry.arguments?.getLong("subCategoryId") ?: 1L
             Scaffold(topBar = { TopBar() }) { innerPadding ->
                 RecipesScreen(
                     Modifier.padding(innerPadding).background(Color(251,194,181)),
-                    subCategoryLabel = subCategoryLabel,
-                    /* navController = navController */
-                )
-            }
-        }
-        /*
-        composable(Screen.RECIPE.route) {
-            Scaffold(topBar = { TopBar() }) { innerPadding ->
-                RecipeScreen(
-                    Modifier.padding(innerPadding),
+                    subCategoryId = subCategoryId,
                     navController = navController
                 )
             }
-        }*/
+        }
+        composable("${Screen.RECIPE.route}/{recipeId}",
+            arguments = listOf(navArgument("recipeId") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val recipeId = backStackEntry.arguments?.getLong("recipeId") ?: 1L
+            Scaffold(topBar = { TopBar() }) { innerPadding ->
+                RecipeScreen(
+                    Modifier.padding(innerPadding),
+                    recipeId = recipeId
+                )
+            }
+        }
     }
 }
