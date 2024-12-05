@@ -48,7 +48,7 @@ fun MainNavigation() {
             route = "${Screen.SUBCATEGORIES.route}/{categoryId}",
             arguments = listOf(navArgument("categoryId") { type = NavType.LongType })
         ) { backStackEntry ->
-            val categoryId = backStackEntry.arguments?.getLong("categoryId") ?: 1L
+            val categoryId = backStackEntry.arguments?.getLong("categoryId") ?: 3L
             Scaffold(topBar = { TopBar() }) { innerPadding ->
                 SubCategoriesScreen(
                     Modifier.padding(innerPadding).background(Color(251,194,181)),
@@ -75,7 +75,7 @@ fun MainNavigation() {
             val recipeId = backStackEntry.arguments?.getLong("recipeId") ?: 1L
             Scaffold(topBar = { TopBar() }) { innerPadding ->
                 RecipeScreen(
-                    Modifier.padding(innerPadding),
+                    Modifier.padding(innerPadding).background(Color(251,194,181)),
                     recipeId = recipeId
                 )
             }

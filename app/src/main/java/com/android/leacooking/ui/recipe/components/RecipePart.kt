@@ -1,0 +1,37 @@
+package com.android.leacooking.ui.recipe.components
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.android.leacooking.data.models.room.RecipePart
+import com.android.leacooking.ui.theme.customFontFamily
+
+@Composable
+fun RecipePart(recipePart: RecipePart) {
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 8.dp) // Réduit le padding global
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = recipePart.recipePartName,
+            fontSize = 20.sp,
+            fontFamily = customFontFamily,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(4.dp)) // Réduit l'espace interne
+        Text(
+            text = recipePart.recipePartProcess,
+            fontFamily = customFontFamily,
+            fontSize = 16.sp
+        )
+    }
+}

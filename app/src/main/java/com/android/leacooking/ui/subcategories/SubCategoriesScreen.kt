@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
@@ -35,27 +34,27 @@ fun SubCategoriesScreen(
         modifier = modifier.fillMaxSize()
     ) {
         val rows = if (isLandscape) 3 else 4
-        val cardSize: Dp = maxHeight / rows
+        val cardHeight: Dp = maxHeight / rows
+        val cardWidth: Dp = maxWidth / columns
 
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp),
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             subCategories.chunked(columns).forEach { rowItems ->
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                    modifier = Modifier
+                        .fillMaxWidth()
                 ) {
                     rowItems.forEach { subCategory ->
                         ImageCard(
                             imageUrl = subCategory.subCategoryImg,
                             label = subCategory.subCategoryLabel,
                             modifier = Modifier
-                                .size(cardSize)
-                                .padding(5.dp)
+                                .width(cardWidth)
+                                .height(cardHeight)
+                                .padding(4.dp)
                                 .clickable {
                                     navController.navigate("${Screen.RECIPES.route}/${subCategory.id}")
                                 },
@@ -70,7 +69,7 @@ fun SubCategoriesScreen(
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    SubCategoriesScreen(categoryId = "Salé")
+    SubCategoriesScreen(categoryId = 1)
 }
 */
 @Composable

@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             categoryImg = "https://img.cuisineaz.com/660x660/2016/07/29/i84653-spaghettis-bolognaise-rapides.jpg"
         ),
         Category(
-            id = 1,
+            id = 2,
             categoryLabel = "Sucré",
             categoryImg = "https://img-3.journaldesfemmes.fr/H0qYPxS9uCGiAxcOYPriAyleulw=/750x500/3e880207483541898952bc7c3491b00b/ccmcms-jdf/39903996.jpg"
         )

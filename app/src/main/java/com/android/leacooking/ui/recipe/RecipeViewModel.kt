@@ -2,10 +2,12 @@ package com.android.leacooking.ui.recipe
 
 import androidx.lifecycle.ViewModel
 import com.android.leacooking.data.models.room.Recipe
+import com.android.leacooking.data.models.room.RecipePart
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
+import kotlin.collections.filter
 
 @HiltViewModel
 class RecipeViewModel @Inject constructor() : ViewModel() {
@@ -40,6 +42,61 @@ class RecipeViewModel @Inject constructor() : ViewModel() {
         )
     )
 
+    private val recipePartsItems = listOf(
+        RecipePart(
+            id = 1,
+            recipeId = 1,
+            recipePartName = "Préparation du poulet",
+            recipePartProcess = "Lavez le poulet, salez-le et poivrez-le, puis laissez-le reposer pendant 30 minutes."
+        ),
+        RecipePart(
+            id = 2,
+            recipeId = 1,
+            recipePartName = "Cuisson du poulet",
+            recipePartProcess = "Préchauffez le four à 180°C, puis enfournez le poulet pendant 1h30."
+        ),
+        RecipePart(
+            id = 3,
+            recipeId = 2,
+            recipePartName = "Préparation des boulettes",
+            recipePartProcess = "Mélangez la viande hachée avec des épices, façonnez des boulettes, et laissez-les reposer."
+        ),
+        RecipePart(
+            id = 4,
+            recipeId = 2,
+            recipePartName = "Cuisson des boulettes",
+            recipePartProcess = "Faites cuire les boulettes à feu moyen dans une poêle avec un peu d'huile."
+        ),
+        RecipePart(
+            id = 5,
+            recipeId = 3,
+            recipePartName = "Préparation du saumon",
+            recipePartProcess = "Assaisonnez le saumon avec de l'aneth, du sel et du poivre."
+        ),
+        RecipePart(
+            id = 6,
+            recipeId = 3,
+            recipePartName = "Cuisson du saumon",
+            recipePartProcess = "Grillez le saumon à feu moyen pendant environ 5 minutes de chaque côté."
+        ),
+        RecipePart(
+            id = 7,
+            recipeId = 4,
+            recipePartName = "Préparation des filets",
+            recipePartProcess = "Assaisonnez les filets avec du sel, du poivre et du jus de citron."
+        ),
+        RecipePart(
+            id = 8,
+            recipeId = 4,
+            recipePartName = "Cuisson des filets",
+            recipePartProcess = "Faites cuire les filets dans une poêle avec du beurre à feu moyen jusqu'à ce qu'ils soient dorés."
+        )
+    )
+
+    fun loadRecipeParts(recipeId: Long) {
+        _recipeParts.value = recipePartsItems.filter { it.recipeId == recipeId }
+    }
+
     fun loadRecipe(recipeId: Long) {
         _recipe.value = recipeItems.firstOrNull { it.id == recipeId }
             ?: Recipe(id = -1, title = "Recette non trouvée", imageUrl = "", persons = 0, subCategoryId = 0)
@@ -47,4 +104,7 @@ class RecipeViewModel @Inject constructor() : ViewModel() {
 
     private val _recipe = MutableStateFlow<Recipe>(recipeItems.elementAt(1))
     val recipe: StateFlow<Recipe> get() = _recipe
+
+    private val _recipeParts = MutableStateFlow<List<RecipePart>>(recipePartsItems)
+    val recipeParts: StateFlow<List<RecipePart>> get() = _recipeParts
 }

@@ -25,5 +25,8 @@ data class RecipePart(
     val recipeId: Long,
 
     @ColumnInfo(name = "recipe_part_name")
-    val recipePartName: String
+    val recipePartName: String,
+
+    @ColumnInfo(name = "recipe_part_process")
+    val recipePartProcess: String
 )

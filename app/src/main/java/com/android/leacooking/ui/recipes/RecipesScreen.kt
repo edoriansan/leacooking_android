@@ -41,12 +41,9 @@ fun RecipesScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(recipes.chunked(columns)) { rowItems ->
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
+                Row{
                     rowItems.forEach { recipe ->
                         ImageCard(
                             imageUrl = recipe.imageUrl,
