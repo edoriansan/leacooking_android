@@ -41,38 +41,25 @@ fun RecipeScreen(
         modifier = modifier.fillMaxSize()
     ) {
         if (isLandscape) {
-            Row(
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
+                    .weight(1f) // Titre et étapes à droite
+                    .fillMaxHeight()
             ) {
-                AsyncImage(
-                    model = recipe.imageUrl, // URL de l'image de la recette
-                    contentDescription = "Image de la recette",
-                    modifier = Modifier
-                        .weight(1f) // L'image prend 50% de l'écran
-                        .fillMaxWidth()
+                Text(
+                    text = recipe.title,
+                    fontFamily = customFontFamily,
+                    fontSize = 40.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(0.dp, 16.dp).background(Color.White)
                 )
-                Column(
-                    modifier = Modifier
-                        .weight(1f) // Titre et étapes à droite
-                        .fillMaxHeight()
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text(
-                        text = recipe.title,
-                        fontFamily = customFontFamily,
-                        fontSize = 40.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(16.dp)
-                    )
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        items(recipeParts) { recipePart ->
-                            RecipePart(recipePart = recipePart)
-                        }
+                    items(recipeParts) { recipePart ->
+                        RecipePart(recipePart = recipePart)
                     }
                 }
             }
