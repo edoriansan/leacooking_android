@@ -14,7 +14,7 @@ class RecipesViewModel @Inject constructor() : ViewModel() {
         RecipeLight(
             id = 1,
             title = "Poulet rôti",
-            imageUrl = "https://www.legauloisprofessionnel.fr/storage/modelfiles/products/23/11/20/41/image-0-655b725cc2e06.png",
+            imageUrl = "https://www.apero-bordeaux.fr/wp-content/uploads/2024/02/20240216_65cfa1ce1fa54.jpg",
             subCategoryId = 1
         ),
         RecipeLight(

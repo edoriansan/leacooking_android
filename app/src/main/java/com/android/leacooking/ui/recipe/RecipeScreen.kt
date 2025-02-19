@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -16,7 +17,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.android.leacooking.ui.recipe.components.RecipePart
-import com.android.leacooking.ui.recipes.isLandscape
 import com.android.leacooking.ui.theme.customFontFamily
 import kotlin.collections.chunked
 import kotlin.collections.forEach
@@ -41,25 +41,47 @@ fun RecipeScreen(
         modifier = modifier.fillMaxSize()
     ) {
         if (isLandscape) {
-            Column(
+            Row(
                 modifier = Modifier
-                    .weight(1f) // Titre et étapes à droite
-                    .fillMaxHeight()
+                    .fillMaxWidth()
             ) {
-                Text(
-                    text = recipe.title,
-                    fontFamily = customFontFamily,
-                    fontSize = 40.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(0.dp, 16.dp).background(Color.White)
+                AsyncImage(
+                    model = recipe.imageUrl,
+                    contentDescription = "Image de la recette",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
                 )
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                Column(
+                    modifier = Modifier
+                        .weight(4f)
+                        .fillMaxHeight()
+                        .background(Color.White)
                 ) {
-                    items(recipeParts) { recipePart ->
-                        RecipePart(recipePart = recipePart)
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        item {
+                            Text(
+                                color = Color(125,65,65),
+                                text = recipe.title,
+                                fontFamily = customFontFamily,
+                                fontSize = 40.sp,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier
+                                    .background(Color(251,194,181))
+                                    .padding(16.dp)
+                                    .fillMaxWidth()
+
+                            )
+                        }
+
+                        items(recipeParts) { recipePart ->
+                            RecipePart(recipePart = recipePart)
+                        }
                     }
                 }
             }
@@ -67,20 +89,28 @@ fun RecipeScreen(
             AsyncImage(
                 model = recipe.imageUrl,
                 contentDescription = "Image de la recette",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-            )
-            Text(
-                text = recipe.title,
-                fontFamily = customFontFamily,
-                fontSize = 40.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(16.dp).background(Color.White).fillMaxWidth()
+                    .weight(1f)
             )
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().weight(3f).background(Color.White),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                item {
+                    Text(
+                        text = recipe.title,
+                        fontFamily = customFontFamily,
+                        fontSize = 40.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .background(Color(251,194,181))
+                            .padding(16.dp)
+                            .fillMaxWidth()
+                    )
+                }
+
                 items(recipeParts.chunked(columns)) { rowItems ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),

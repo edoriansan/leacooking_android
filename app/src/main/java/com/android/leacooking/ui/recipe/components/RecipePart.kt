@@ -18,7 +18,7 @@ import com.android.leacooking.ui.theme.customFontFamily
 fun RecipePart(recipePart: RecipePart) {
     Column(
         modifier = Modifier
-            .padding(horizontal = 8.dp) // Réduit le padding global
+            .padding(16.dp)
             .fillMaxWidth()
     ) {
         Text(
@@ -27,7 +27,7 @@ fun RecipePart(recipePart: RecipePart) {
             fontFamily = customFontFamily,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(4.dp)) // Réduit l'espace interne
+        Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = recipePart.recipePartProcess,
             fontFamily = customFontFamily,
