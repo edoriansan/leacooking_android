@@ -47,16 +47,16 @@ fun SubCategoriesScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
-                    rowItems.forEach { subCategory ->
+                    rowItems.forEach { recipeSubcategory ->
                         ImageCard(
-                            imageUrl = subCategory.subCategoryImg,
-                            label = subCategory.subCategoryLabel,
+                            imageUrl = recipeSubcategory.recipeSubcategoryImg,
+                            label = recipeSubcategory.recipeSubcategoryLabel,
                             modifier = Modifier
                                 .width(cardWidth)
                                 .height(cardHeight)
                                 .padding(4.dp)
                                 .clickable {
-                                    navController.navigate("${Screen.RECIPES.route}/${subCategory.id}")
+                                    navController.navigate("${Screen.RECIPES.route}/${recipeSubcategory.id}")
                                 },
                         )
                     }

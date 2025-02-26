@@ -9,8 +9,5 @@ import com.android.leacooking.data.models.room.RecipePart
 interface RecipePartDao {
     @Dao
     interface RecipePartDao {
-        @Transaction
-        @Query("SELECT * FROM recipe_part WHERE id_recipe = :recipeId")
-        suspend fun getRecipePartsWithIngredients(recipeId: Long): List<RecipePart>
     }
 }

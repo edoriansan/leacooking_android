@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
-import com.android.leacooking.data.models.room.Category
+import com.android.leacooking.data.models.room.RecipeCategory
 
 @Dao
-interface CategoryDao {
+interface RecipeCategoryDao {
     @Transaction
     @Query("SELECT * FROM category")
-    fun getCategories(): LiveData<List<Category>>
+    fun getCategories(): LiveData<List<RecipeCategory>>
 }

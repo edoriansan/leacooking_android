@@ -22,7 +22,7 @@ fun RecipePart(recipePart: RecipePart) {
             .fillMaxWidth()
     ) {
         Text(
-            text = recipePart.recipePartName,
+            text = recipePart.recipePartTitle,
             fontSize = 20.sp,
             fontFamily = customFontFamily,
             fontWeight = FontWeight.Bold
