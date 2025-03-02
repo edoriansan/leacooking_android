@@ -65,13 +65,7 @@ fun SubCategoriesScreen(
         }
     }
 }
-/*
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-    SubCategoriesScreen(categoryId = 1)
-}
-*/
+
 @Composable
 fun isLandscape(): Boolean {
     val configuration = LocalConfiguration.current

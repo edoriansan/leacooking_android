@@ -7,9 +7,11 @@ import com.android.leacooking.data.models.room.RecipePartIngredient
 
 data class RecipePartWithIngredients(
     @Embedded val part: RecipePart,
+
     @Relation(
         parentColumn = "id",
-        entityColumn = "id_recipe_part"
+        entityColumn = "id_recipe_part",
+        entity = RecipePartIngredient::class
     )
-    val ingredients: List<RecipePartIngredient>
+    val ingredients: List<IngredientWithQuantity>
 )

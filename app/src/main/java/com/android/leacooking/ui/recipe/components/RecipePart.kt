@@ -11,25 +11,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.android.leacooking.data.models.room.RecipePart
+import com.android.leacooking.data.models.custom.RecipePartWithIngredients
 import com.android.leacooking.ui.theme.customFontFamily
 
 @Composable
-fun RecipePart(recipePart: RecipePart) {
+fun RecipePart(recipePart: RecipePartWithIngredients) {
     Column(
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
     ) {
         Text(
-            text = recipePart.recipePartTitle,
+            text = recipePart.part.recipePartTitle,
             fontSize = 20.sp,
             fontFamily = customFontFamily,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = recipePart.recipePartProcess,
+            text = recipePart.part.recipePartProcess,
             fontFamily = customFontFamily,
             fontSize = 16.sp
         )

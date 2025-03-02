@@ -10,7 +10,6 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor() : ViewModel() {
 
-
     // Mock data
     private val categoryItems = listOf(
         RecipeCategory(

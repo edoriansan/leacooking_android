@@ -14,5 +14,4 @@ data class FullRecipe(
         entity = RecipePart::class
     )
     val parts: List<RecipePartWithIngredients>
-
 )

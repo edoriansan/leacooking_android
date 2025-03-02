@@ -15,8 +15,5 @@ data class RecipePartIngredient(
     val ingredientId: Long,
 
     @ColumnInfo(name = "quantity")
-    val quantity: String,
-
-    @ColumnInfo(name = "unit")
-    val unit: String?
+    val quantity: Int
 )
