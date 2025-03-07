@@ -57,14 +57,14 @@ fun MainNavigation() {
                 )
             }
         }
-        composable("${Screen.RECIPES.route}/{subCategoryId}",
-            arguments = listOf(navArgument("subCategoryId") { type = NavType.LongType })
+        composable("${Screen.RECIPES.route}/{recipeSubcategoryId}",
+            arguments = listOf(navArgument("recipeSubcategoryId") { type = NavType.LongType })
         ) { backStackEntry ->
-            val subCategoryId = backStackEntry.arguments?.getLong("subCategoryId") ?: 1L
+            val recipeSubcategoryId = backStackEntry.arguments?.getLong("recipeSubcategoryId") ?: 1L
             Scaffold(topBar = { TopBar() }) { innerPadding ->
                 RecipesScreen(
                     Modifier.padding(innerPadding).background(Color(251,194,181)),
-                    subCategoryId = subCategoryId,
+                    recipeSubcategoryId = recipeSubcategoryId,
                     navController = navController
                 )
             }

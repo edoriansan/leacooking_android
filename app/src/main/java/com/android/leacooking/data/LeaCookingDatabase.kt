@@ -4,20 +4,21 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.android.leacooking.data.converters.DateConverter
 import com.android.leacooking.data.dao.IngredientDao
+import com.android.leacooking.data.dao.QuantityTypeDao
 import com.android.leacooking.data.dao.RecipeDao
 import com.android.leacooking.data.dao.RecipePartDao
 import com.android.leacooking.data.dao.RecipePartIngredientDao
-import com.android.leacooking.data.dao.CategoryDao
-import com.android.leacooking.data.dao.SubcategoryDao
-import com.android.leacooking.data.models.room.Category
-import com.android.leacooking.data.models.room.Ingredient
+import com.android.leacooking.data.dao.RecipeCategoryDao
+import com.android.leacooking.data.dao.RecipeSubcategoryDao
+import com.android.leacooking.data.models.custom.IngredientWithQuantity
 import com.android.leacooking.data.models.room.Recipe
+import com.android.leacooking.data.models.room.RecipeCategory
+import com.android.leacooking.data.models.room.Ingredient
+import com.android.leacooking.data.models.room.QuantityType
 import com.android.leacooking.data.models.room.RecipePart
 import com.android.leacooking.data.models.room.RecipePartIngredient
-import com.android.leacooking.data.models.room.SubCategory
+import com.android.leacooking.data.models.room.RecipeSubcategory
 
 /**
  * Database class with a singleton Instance object.
@@ -28,22 +29,25 @@ import com.android.leacooking.data.models.room.SubCategory
         RecipePart::class,
         Ingredient::class,
         RecipePartIngredient::class,
-        Category::class,
-        SubCategory::class
+        RecipeCategory::class,
+        RecipeSubcategory::class,
+        QuantityType::class
+    ],
+    views = [
+        IngredientWithQuantity::class
     ],
     version = 1,
     exportSchema = false
 )
-@TypeConverters(DateConverter::class)
 abstract class LeaCookingDatabase : RoomDatabase() {
 
     abstract fun recipeDao(): RecipeDao
     abstract fun recipePartDao(): RecipePartDao
     abstract fun ingredientDao(): IngredientDao
+    abstract fun quantityTypeDao(): QuantityTypeDao
     abstract fun recipePartIngredientDao(): RecipePartIngredientDao
-    abstract fun categoryDao(): CategoryDao
-    abstract fun subCategoryDao(): SubcategoryDao
-
+    abstract fun categoryDao(): RecipeCategoryDao
+    abstract fun recipeRecipeSubcategoryDao(): RecipeSubcategoryDao
 
     companion object {
         @Volatile

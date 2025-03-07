@@ -1,14 +1,14 @@
 package com.android.leacooking.data.di
 
 import android.content.Context
-import androidx.room.Room
 import com.android.leacooking.data.LeaCookingDatabase
-import com.android.leacooking.data.dao.CategoryDao
+import com.android.leacooking.data.dao.IngredientDao
+import com.android.leacooking.data.dao.QuantityTypeDao
+import com.android.leacooking.data.dao.RecipeCategoryDao
 import com.android.leacooking.data.dao.RecipeDao
 import com.android.leacooking.data.dao.RecipePartDao
-import com.android.leacooking.data.dao.IngredientDao
 import com.android.leacooking.data.dao.RecipePartIngredientDao
-import com.android.leacooking.data.dao.SubcategoryDao
+import com.android.leacooking.data.dao.RecipeSubcategoryDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,12 +46,17 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideCategoryDao(database: LeaCookingDatabase): CategoryDao {
+    fun provideRecipeCategoryDao(database: LeaCookingDatabase): RecipeCategoryDao {
         return database.categoryDao()
     }
 
     @Provides
-    fun provideSubCategoryDao(database: LeaCookingDatabase): SubcategoryDao {
-        return database.subCategoryDao()
+    fun provideRecipeSubcategoryDao(database: LeaCookingDatabase): RecipeSubcategoryDao {
+        return database.recipeRecipeSubcategoryDao()
+    }
+
+    @Provides
+    fun provideQuantityTypeDao(database: LeaCookingDatabase): QuantityTypeDao {
+        return database.quantityTypeDao()
     }
 }
