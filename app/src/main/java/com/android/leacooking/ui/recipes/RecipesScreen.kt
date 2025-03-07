@@ -20,12 +20,12 @@ import com.android.leacooking.ui.shared.imageCard.ImageCard
 @Composable
 fun RecipesScreen(
     modifier: Modifier = Modifier,
-    subCategoryId: Long,
+    recipeSubcategoryId: Long,
     navController: NavController,
     viewModel: RecipesViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(subCategoryId) {
-        viewModel.loadRecipes(subCategoryId)
+    LaunchedEffect(recipeSubcategoryId) {
+        viewModel.loadRecipes(recipeSubcategoryId)
     }
 
     val recipes by viewModel.recipes.collectAsState()

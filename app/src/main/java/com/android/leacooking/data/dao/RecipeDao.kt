@@ -1,24 +1,30 @@
 package com.android.leacooking.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.android.leacooking.data.models.custom.RecipeLight
+import androidx.room.Transaction
+import com.android.leacooking.data.models.custom.FullRecipe
 import com.android.leacooking.data.models.room.Recipe
+import com.android.leacooking.data.models.room.RecipeCategory
 
 @Dao
 interface RecipeDao {
+    @Transaction
     @Query("""
-        SELECT r.id, r.title, r.image_url, r.id_subcategory
+        SELECT r.*, rp.*, rpi.*, i.*, qt.label as quantityType
         FROM recipe r
-        WHERE id_subcategory = :subcategoryId
+        JOIN recipe_part rp ON r.id = rp.id_recipe
+        JOIN recipe_part_ingredient rpi ON rp.id = rpi.id_recipe_part
+        JOIN ingredient i ON rpi.id_ingredient = i.id
+        JOIN quantity_type qt ON i.id_quantity_type = qt.id
+        WHERE r.id = :recipeId
     """)
-    fun getRecipeLightBySubcategoryId(subcategoryId: Long): LiveData<List<RecipeLight>>
+    suspend fun getFullRecipe(recipeId: Long): FullRecipe
 
-    @Query("""
-        SELECT r.* 
-        FROM recipe r
-        WHERE r.id = :id
-    """)
-    fun getRecipeById(id: Long): LiveData<Recipe>
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(recipe: List<Recipe>)
 }
+

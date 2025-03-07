@@ -3,14 +3,12 @@ package com.android.leacooking.data.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import androidx.room.Query
 import androidx.room.Transaction
-import com.android.leacooking.data.models.room.RecipeCategory
-import com.android.leacooking.data.models.room.RecipePart
+import com.android.leacooking.data.models.room.QuantityType
 
 @Dao
-interface RecipePartDao {
+interface QuantityTypeDao {
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(recipeParts: List<RecipePart>)
+    suspend fun insertAll(quantityTypes: List<QuantityType>)
 }

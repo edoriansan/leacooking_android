@@ -1,15 +1,16 @@
 package com.android.leacooking.data.models.room
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(tableName = "ingredient")
 data class Ingredient(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Long = 0,
+    val id: Long,
 
     @ColumnInfo(name = "ingredient_label")
-    val ingredientLabel: String
+    val label: String,
+
+    @ColumnInfo(name = "id_quantity_type")
+    val quantityTypeId: Long
 )

@@ -2,31 +2,21 @@ package com.android.leacooking.data.models.room
 
 import androidx.room.*
 
-@Entity(
-    tableName = "recipe",
-    foreignKeys = [
-        ForeignKey(
-            entity = SubCategory::class,
-            parentColumns = ["id"],
-            childColumns = ["id_subcategory"],
-            onDelete = ForeignKey.Companion.CASCADE
-        )
-    ]
-)
+@Entity
 data class Recipe(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Long = 0,
+    val id: Long,
 
     @ColumnInfo(name = "title")
     val title: String,
 
     @ColumnInfo(name = "persons")
-    val persons: Long,
+    val persons: Int?,
 
     @ColumnInfo(name = "image_url")
     val imageUrl: String? = null,
 
     @ColumnInfo(name = "id_subcategory")
-    val subCategoryId: Long
+    val recipeSubcategoryId: Long
 )
