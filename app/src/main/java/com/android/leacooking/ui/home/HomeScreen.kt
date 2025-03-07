@@ -1,6 +1,5 @@
 package com.android.leacooking.ui.home
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -26,7 +25,6 @@ import com.android.leacooking.ui.home.viewmodel.HomeViewModel
 import com.android.leacooking.ui.recipes.isLandscape
 import kotlin.collections.chunked
 
-@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -48,7 +46,6 @@ fun HomeScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Diviser les catégories en lignes de `columns` éléments
             categories.chunked(columns).forEach { rowItems ->
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -59,15 +56,14 @@ fun HomeScreen(
                             imageUrl = category.categoryImg,
                             label = category.categoryLabel,
                             modifier = Modifier
-                                .weight(1f) // Répartir uniformément l'espace horizontal
-                                .height(cardHeight) // Hauteur fixe
+                                .weight(1f)
+                                .height(cardHeight)
                                 .clickable {
                                     navController.navigate("${Screen.SUBCATEGORIES.route}/${category.id}")
                                 },
                             fontSize = 40.sp
                         )
                     }
-                    // Remplir l'espace vide si la ligne est incomplète
                     repeat(columns - rowItems.size) {
                         Spacer(modifier = Modifier.weight(1f))
                     }
@@ -75,16 +71,4 @@ fun HomeScreen(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun PreviewHomeScreen() {
-    HomeScreen(navController = NavController(LocalContext.current))
-}
-
-@Composable
-fun isLandscape(): Boolean {
-    val configuration = androidx.compose.ui.platform.LocalConfiguration.current
-    return configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
 }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -13,25 +12,35 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.android.leacooking.data.models.custom.RecipePartWithIngredients
 import com.android.leacooking.ui.theme.customFontFamily
+import androidx.compose.material3.Text
 
 @Composable
-fun RecipePart(recipePart: RecipePartWithIngredients) {
+fun Ingredients(recipePart: RecipePartWithIngredients) {
     Column(
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
     ) {
         Text(
-            text = recipePart.part.recipePartTitle,
+            text = "Pour ${recipePart.part.recipePartTitle.lowercase()}",
             fontSize = 20.sp,
             fontFamily = customFontFamily,
             fontWeight = FontWeight.Bold
         )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = recipePart.part.recipePartProcess,
-            fontFamily = customFontFamily,
-            fontSize = 16.sp
-        )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Column(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            recipePart.ingredients.forEach { ingredient ->
+                Text(
+                    text = "${ingredient.ingredient_label}: ${ingredient.quantity} ${ingredient.quantity_type_label ?: ""}",
+                    fontSize = 18.sp,
+                    fontFamily = customFontFamily,
+                    fontWeight = FontWeight.Normal
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+            }
+        }
     }
 }

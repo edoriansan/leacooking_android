@@ -10,12 +10,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.android.leacooking.ui.recipe.components.Ingredients
 import com.android.leacooking.ui.recipe.components.RecipePart
 import com.android.leacooking.ui.theme.customFontFamily
 import kotlin.collections.chunked
@@ -29,11 +31,9 @@ fun RecipeScreen(
 ) {
     LaunchedEffect(recipeId) {
         viewModel.loadRecipe(recipeId)
-        /* viewModel.loadRecipeParts(recipeId) */
     }
 
     val recipe by viewModel.recipe.collectAsState()
-    val recipeParts by viewModel.recipeParts.collectAsState()
     val isLandscape = isLandscape()
     val columns = if (isLandscape) 2 else 1
 
@@ -46,48 +46,65 @@ fun RecipeScreen(
                     .fillMaxWidth()
             ) {
                 AsyncImage(
-                    model = recipe.imageUrl,
+                    model = recipe.recipe.imageUrl,
                     contentDescription = "Image de la recette",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
                 )
-                Column(
+                LazyColumn(
                     modifier = Modifier
                         .weight(4f)
                         .fillMaxHeight()
-                        .background(Color.White)
+                        .background(Color.White),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        item {
-                            Text(
-                                color = Color(125,65,65),
-                                text = recipe.title,
-                                fontFamily = customFontFamily,
-                                fontSize = 40.sp,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier
-                                    .background(Color(251,194,181))
-                                    .padding(16.dp)
-                                    .fillMaxWidth()
+                    item {
+                        Text(
+                            color = Color(125,65,65),
+                            text = recipe.recipe.title,
+                            fontFamily = customFontFamily,
+                            fontSize = 40.sp,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .background(Color(251,194,181))
+                                .padding(16.dp)
+                                .fillMaxWidth()
+                        )
+                    }
 
-                            )
-                        }
+                    item {
+                        Text(
+                            text = "Ingrédients",
+                            fontFamily = customFontFamily,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
+                    items(recipe.parts) { recipePart ->
+                        Ingredients(recipePart = recipePart)
+                    }
 
-                        items(recipeParts) { recipePart ->
-                            RecipePart(recipePart = recipePart)
-                        }
+                    item {
+                        Text(
+                            text = "Étapes",
+                            fontFamily = customFontFamily,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
+                    items(recipe.parts) { recipePart ->
+                        RecipePart(recipePart = recipePart)
                     }
                 }
             }
         } else {
             AsyncImage(
-                model = recipe.imageUrl,
+                model = recipe.recipe.imageUrl,
                 contentDescription = "Image de la recette",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -100,7 +117,7 @@ fun RecipeScreen(
             ) {
                 item {
                     Text(
-                        text = recipe.title,
+                        text = recipe.recipe.title,
                         fontFamily = customFontFamily,
                         fontSize = 40.sp,
                         textAlign = TextAlign.Center,
@@ -111,7 +128,29 @@ fun RecipeScreen(
                     )
                 }
 
-                items(recipeParts.chunked(columns)) { rowItems ->
+                item {
+                    Text(
+                        text = "Ingrédients",
+                        fontFamily = customFontFamily,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+                items(recipe.parts) { recipePart ->
+                    Ingredients(recipePart = recipePart)
+                }
+
+                item {
+                    Text(
+                        text = "Étapes",
+                        fontFamily = customFontFamily,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+                items(recipe.parts.chunked(columns)) { rowItems ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly

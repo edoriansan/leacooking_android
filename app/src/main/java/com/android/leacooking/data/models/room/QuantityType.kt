@@ -4,15 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "category")
-data class Category(
+@Entity(tableName = "quantity_type")
+data class QuantityType(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Long,
 
-    @ColumnInfo(name = "category_label")
-    val categoryLabel: String,
-
-    @ColumnInfo(name = "category_img")
-    val categoryImg: String
+    @ColumnInfo(name = "label")
+    val label: String
 )
