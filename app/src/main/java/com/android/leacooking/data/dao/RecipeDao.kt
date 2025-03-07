@@ -1,9 +1,13 @@
 package com.android.leacooking.data.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.android.leacooking.data.models.custom.FullRecipe
+import com.android.leacooking.data.models.room.Recipe
+import com.android.leacooking.data.models.room.RecipeCategory
 
 @Dao
 interface RecipeDao {
@@ -18,5 +22,9 @@ interface RecipeDao {
         WHERE r.id = :recipeId
     """)
     suspend fun getFullRecipe(recipeId: Long): FullRecipe
+
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(recipe: List<Recipe>)
 }
 

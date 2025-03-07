@@ -11,6 +11,7 @@ import com.android.leacooking.data.dao.RecipePartDao
 import com.android.leacooking.data.dao.RecipePartIngredientDao
 import com.android.leacooking.data.dao.RecipeCategoryDao
 import com.android.leacooking.data.dao.RecipeSubcategoryDao
+import com.android.leacooking.data.models.custom.IngredientWithQuantity
 import com.android.leacooking.data.models.room.Recipe
 import com.android.leacooking.data.models.room.RecipeCategory
 import com.android.leacooking.data.models.room.Ingredient
@@ -31,6 +32,9 @@ import com.android.leacooking.data.models.room.RecipeSubcategory
         RecipeCategory::class,
         RecipeSubcategory::class,
         QuantityType::class
+    ],
+    views = [
+        IngredientWithQuantity::class
     ],
     version = 1,
     exportSchema = false

@@ -19,59 +19,93 @@ class RecipeViewModel @Inject constructor() : ViewModel() {
     private val recipeItems = listOf(
         FullRecipe(
             Recipe(
-                id = 3,
-                title = "Saumon grillé à l'aneth",
-                imageUrl = "https://www.seafoodsource.com/sites/default/files/styles/large/public/2020-03/Salmon-grilled_1.jpg",
-                persons = 6,
-                recipeSubcategoryId = 2
+                id = 1,
+                title = "Pizza Margherita",
+                imageUrl = "https://fr.ooni.com/cdn/shop/articles/Margherita-9920.jpg?crop=center&height=915&v=1644590066&width=1200",
+
+                persons = 4,
+                recipeSubcategoryId = 1
             ),
             parts = listOf(
                 RecipePartWithIngredients(
                     part = RecipePart(
                         id = 10L,
-                        recipePartTitle = "Pâte à pizza",
-                        recipePartProcess = "Mélanger les ingrédients et pétrir la pâte",
+                        recipePartTitle = "Préparation de la pâte",
+                        recipePartProcess = "Mélanger les ingrédients, laisser reposer la pâte et étaler.",
                         recipeId = 1L
                     ),
                     ingredients = listOf(
                         IngredientWithQuantity(
-                            partIngredient = RecipePartIngredient(
-                                recipePartId = 10L,
-                                ingredientId = 200L,
-                                quantity = 500
-                            ),
-                            ingredient = Ingredient(
-                                id = 200L,
-                                label = "Farine",
-                                quantityTypeId = 2L
-                            ),
-                            quantityType = QuantityType(
-                                id = 2L,
-                                label = "grammes"
-                            )
+                            id_recipe_part = 10L,
+                            id_ingredient = 100L,
+                            ingredient_label = "Farine",
+                            id_quantity_type = 2L,
+                            quantity_type_label = "grammes",
+                            quantity = 250
                         ),
                         IngredientWithQuantity(
-                            partIngredient = RecipePartIngredient(
-                                recipePartId = 10L,
-                                ingredientId = 201L,
-                                quantity = 1
-                            ),
-                            ingredient = Ingredient(
-                                id = 201L,
-                                label = "Œuf",
-                                quantityTypeId = 1L
-                            ),
-                            quantityType = QuantityType(
-                                id = 1L,
-                                label = "unité"
-                            )
+                            id_recipe_part = 10L,
+                            id_ingredient = 101L,
+                            ingredient_label = "Eau",
+                            id_quantity_type = 2L,
+                            quantity_type_label = "millilitres",
+                            quantity = 150
+                        ),
+                        IngredientWithQuantity(
+                            id_recipe_part = 10L,
+                            id_ingredient = 102L,
+                            ingredient_label = "Levure de boulanger",
+                            id_quantity_type = 2L,
+                            quantity_type_label = "grammes",
+                            quantity = 5
+                        ),
+                        IngredientWithQuantity(
+                            id_recipe_part = 10L,
+                            id_ingredient = 103L,
+                            ingredient_label = "Sel",
+                            id_quantity_type = 2L,
+                            quantity_type_label = "grammes",
+                            quantity = 5
+                        )
+                    )
+                ),
+                RecipePartWithIngredients(
+                    part = RecipePart(
+                        id = 20L,
+                        recipePartTitle = "Garniture",
+                        recipePartProcess = "Étaler la sauce tomate, ajouter le fromage, puis garnir avec les feuilles de basilic.",
+                        recipeId = 1L
+                    ),
+                    ingredients = listOf(
+                        IngredientWithQuantity(
+                            id_recipe_part = 20L,
+                            id_ingredient = 104L,
+                            ingredient_label = "Sauce tomate",
+                            id_quantity_type = 2L,
+                            quantity_type_label = "grammes",
+                            quantity = 100
+                        ),
+                        IngredientWithQuantity(
+                            id_recipe_part = 20L,
+                            id_ingredient = 105L,
+                            ingredient_label = "Mozzarella",
+                            id_quantity_type = 2L,
+                            quantity_type_label = "grammes",
+                            quantity = 150
+                        ),
+                        IngredientWithQuantity(
+                            id_recipe_part = 20L,
+                            id_ingredient = 106L,
+                            ingredient_label = "Basilic frais",
+                            id_quantity_type = 1L,
+                            quantity_type_label = "unité",
+                            quantity = 5
                         )
                     )
                 )
             )
         )
     )
-
 
     fun loadRecipe(recipeId: Long) {
         _recipe.value = recipeItems.firstOrNull { it.recipe.id == recipeId }
@@ -81,6 +115,6 @@ class RecipeViewModel @Inject constructor() : ViewModel() {
             )
     }
 
-    private val _recipe = MutableStateFlow<FullRecipe>(recipeItems.elementAt(1))
+    private val _recipe = MutableStateFlow<FullRecipe>(recipeItems.elementAt(0))  // Correct index 0
     val recipe: StateFlow<FullRecipe> get() = _recipe
 }
