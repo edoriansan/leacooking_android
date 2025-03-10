@@ -1,7 +1,7 @@
 package com.android.leacooking.ui.subcategories
 
 import androidx.lifecycle.ViewModel
-import com.android.leacooking.data.models.room.RecipeSubcategory
+import com.android.leacooking.data.model.room.RecipeSubcategory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

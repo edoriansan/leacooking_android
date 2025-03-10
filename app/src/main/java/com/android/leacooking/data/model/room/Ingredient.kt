@@ -1,4 +1,4 @@
-package com.android.leacooking.data.models.room
+package com.android.leacooking.data.model.room
 
 import androidx.room.*
 
@@ -12,5 +12,5 @@ data class Ingredient(
     val label: String,
 
     @ColumnInfo(name = "id_quantity_type")
-    val quantityTypeId: Long
+    val quantityTypeId: Long?
 )

@@ -11,14 +11,14 @@ import com.android.leacooking.data.dao.RecipePartDao
 import com.android.leacooking.data.dao.RecipePartIngredientDao
 import com.android.leacooking.data.dao.RecipeCategoryDao
 import com.android.leacooking.data.dao.RecipeSubcategoryDao
-import com.android.leacooking.data.models.custom.IngredientWithQuantity
-import com.android.leacooking.data.models.room.Recipe
-import com.android.leacooking.data.models.room.RecipeCategory
-import com.android.leacooking.data.models.room.Ingredient
-import com.android.leacooking.data.models.room.QuantityType
-import com.android.leacooking.data.models.room.RecipePart
-import com.android.leacooking.data.models.room.RecipePartIngredient
-import com.android.leacooking.data.models.room.RecipeSubcategory
+import com.android.leacooking.data.model.custom.IngredientWithQuantity
+import com.android.leacooking.data.model.room.Recipe
+import com.android.leacooking.data.model.room.RecipeCategory
+import com.android.leacooking.data.model.room.Ingredient
+import com.android.leacooking.data.model.room.QuantityType
+import com.android.leacooking.data.model.room.RecipePart
+import com.android.leacooking.data.model.room.RecipePartIngredient
+import com.android.leacooking.data.model.room.RecipeSubcategory
 
 /**
  * Database class with a singleton Instance object.

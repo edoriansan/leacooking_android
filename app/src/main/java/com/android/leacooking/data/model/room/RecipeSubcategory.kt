@@ -1,4 +1,4 @@
-package com.android.leacooking.data.models.room
+package com.android.leacooking.data.model.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -20,6 +20,4 @@ data class RecipeSubcategory(
 
     @ColumnInfo(name = "id_category")
     val categoryId: Long,
-
-    val categoryLabel: String
 )

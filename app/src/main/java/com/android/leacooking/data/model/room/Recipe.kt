@@ -1,4 +1,4 @@
-package com.android.leacooking.data.models.room
+package com.android.leacooking.data.model.room
 
 import androidx.room.*
 

@@ -6,8 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.android.leacooking.data.models.room.QuantityType
-import com.android.leacooking.data.models.room.RecipeCategory
+import com.android.leacooking.data.model.room.QuantityType
+import com.android.leacooking.data.model.room.RecipeCategory
 
 @Dao
 interface RecipeCategoryDao {

@@ -1,4 +1,4 @@
-package com.android.leacooking.data.models.custom
+package com.android.leacooking.data.model.custom
 
 import androidx.room.DatabaseView
 

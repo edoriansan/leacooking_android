@@ -1,7 +1,7 @@
 package com.android.leacooking.ui.recipes
 
 import androidx.lifecycle.ViewModel
-import com.android.leacooking.data.models.custom.RecipePreview
+import com.android.leacooking.data.model.custom.RecipePreview
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
