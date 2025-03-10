@@ -46,7 +46,7 @@ fun RecipeScreen(
                     .fillMaxWidth()
             ) {
                 AsyncImage(
-                    model = recipe.recipe.imageUrl,
+                    model = recipe.recipe.recipeImg,
                     contentDescription = "Image de la recette",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -104,7 +104,7 @@ fun RecipeScreen(
             }
         } else {
             AsyncImage(
-                model = recipe.recipe.imageUrl,
+                model = recipe.recipe.recipeImg,
                 contentDescription = "Image de la recette",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

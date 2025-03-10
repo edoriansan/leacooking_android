@@ -1,4 +1,4 @@
-package com.android.leacooking.data.models.room
+package com.android.leacooking.data.model.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "recipe_subcategory")
 data class RecipeSubcategory(
     @PrimaryKey
     @ColumnInfo(name = "id")
@@ -19,7 +19,5 @@ data class RecipeSubcategory(
     val recipeSubcategoryImg: String,
 
     @ColumnInfo(name = "id_category")
-    val categoryId: Long,
-
-    val categoryLabel: String
+    val recipeCategoryId: Long,
 )

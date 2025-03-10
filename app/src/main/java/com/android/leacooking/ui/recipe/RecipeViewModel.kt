@@ -1,14 +1,14 @@
 package com.android.leacooking.ui.recipe
 
 import androidx.lifecycle.ViewModel
-import com.android.leacooking.data.models.custom.FullRecipe
-import com.android.leacooking.data.models.custom.IngredientWithQuantity
-import com.android.leacooking.data.models.custom.RecipePartWithIngredients
-import com.android.leacooking.data.models.room.Ingredient
-import com.android.leacooking.data.models.room.QuantityType
-import com.android.leacooking.data.models.room.Recipe
-import com.android.leacooking.data.models.room.RecipePart
-import com.android.leacooking.data.models.room.RecipePartIngredient
+import com.android.leacooking.data.model.custom.FullRecipe
+import com.android.leacooking.data.model.custom.IngredientWithQuantity
+import com.android.leacooking.data.model.custom.RecipePartWithIngredients
+import com.android.leacooking.data.model.room.Ingredient
+import com.android.leacooking.data.model.room.QuantityType
+import com.android.leacooking.data.model.room.Recipe
+import com.android.leacooking.data.model.room.RecipePart
+import com.android.leacooking.data.model.room.RecipePartIngredient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +21,7 @@ class RecipeViewModel @Inject constructor() : ViewModel() {
             Recipe(
                 id = 1,
                 title = "Pizza Margherita",
-                imageUrl = "https://fr.ooni.com/cdn/shop/articles/Margherita-9920.jpg?crop=center&height=915&v=1644590066&width=1200",
+                recipeImg = "https://fr.ooni.com/cdn/shop/articles/Margherita-9920.jpg?crop=center&height=915&v=1644590066&width=1200",
 
                 persons = 4,
                 recipeSubcategoryId = 1
@@ -110,7 +110,7 @@ class RecipeViewModel @Inject constructor() : ViewModel() {
     fun loadRecipe(recipeId: Long) {
         _recipe.value = recipeItems.firstOrNull { it.recipe.id == recipeId }
             ?: FullRecipe(
-                Recipe(id = -1, title = "Recette non trouvée", imageUrl = "", persons = 0, recipeSubcategoryId = 0),
+                Recipe(id = -1, title = "Recette non trouvée", recipeImg = "", persons = 0, recipeSubcategoryId = 0),
                 parts = listOf()
             )
     }

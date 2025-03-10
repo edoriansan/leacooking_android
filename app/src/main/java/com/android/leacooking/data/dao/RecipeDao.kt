@@ -4,14 +4,11 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
-import com.android.leacooking.data.models.custom.FullRecipe
-import com.android.leacooking.data.models.room.Recipe
-import com.android.leacooking.data.models.room.RecipeCategory
+import com.android.leacooking.data.model.custom.FullRecipe
+import com.android.leacooking.data.model.room.Recipe
 
 @Dao
 interface RecipeDao {
-    @Transaction
     @Query("""
         SELECT r.*, rp.*, rpi.*, i.*, qt.label as quantityType
         FROM recipe r
@@ -23,8 +20,12 @@ interface RecipeDao {
     """)
     suspend fun getFullRecipe(recipeId: Long): FullRecipe
 
-    @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(recipe: List<Recipe>)
-}
 
+    @Query("SELECT count(*) FROM recipe")
+    suspend fun countRecipes(): Int
+
+    @Query("SELECT * FROM recipe")
+    fun getAllRecipes(): List<Recipe>
+}

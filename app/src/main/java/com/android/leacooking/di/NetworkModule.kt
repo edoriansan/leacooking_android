@@ -1,6 +1,7 @@
 package com.android.leacooking.di
 
 import android.util.Log
+import com.android.leacooking.network.service.ApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -17,7 +18,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL = "https://lea-cooking-api.com/"
+    private const val BASE_URL = "https://0fab-2a01-cb14-155e-2000-31b3-be9f-4849-e277.ngrok-free.app"
 
     @Singleton
     @Provides
@@ -43,5 +44,11 @@ object NetworkModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi)).client(
                 okHttpClient
             ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }
