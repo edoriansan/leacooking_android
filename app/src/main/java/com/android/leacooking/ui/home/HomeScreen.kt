@@ -10,14 +10,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.android.leacooking.ui.Screen
 import com.android.leacooking.ui.shared.imageCard.ImageCard
@@ -31,14 +32,19 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     navController: NavController
 ) {
-    val categories by viewModel.categories.collectAsState()
+    val categories by viewModel.categories.collectAsStateWithLifecycle()
     val isLandscape = isLandscape()
     val columns = if (isLandscape) 2 else 1
+    val showSyncProgressDialog by viewModel.showSyncProgressDialog.collectAsStateWithLifecycle()
 
     BoxWithConstraints(
         modifier = modifier.fillMaxSize()
     ) {
         val cardHeight: Dp = maxHeight / (if (isLandscape) 1 else 2)
+
+        LaunchedEffect(Unit) {
+            viewModel.synchronisation()
+        }
 
         Column(
             modifier = Modifier
@@ -46,6 +52,14 @@ fun HomeScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            if (showSyncProgressDialog) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .align(Alignment.CenterHorizontally)
+                )
+            }
+
             categories.chunked(columns).forEach { rowItems ->
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -53,8 +67,8 @@ fun HomeScreen(
                 ) {
                     rowItems.forEach { category ->
                         ImageCard(
-                            imageUrl = category.categoryImg,
-                            label = category.categoryLabel,
+                            imageUrl = category.recipeCategoryImg,
+                            label = category.recipeCategoryLabel,
                             modifier = Modifier
                                 .weight(1f)
                                 .height(cardHeight)

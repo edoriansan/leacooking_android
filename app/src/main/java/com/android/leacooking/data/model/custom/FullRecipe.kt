@@ -1,9 +1,9 @@
-package com.android.leacooking.data.models.custom
+package com.android.leacooking.data.model.custom
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.android.leacooking.data.models.room.Recipe
-import com.android.leacooking.data.models.room.RecipePart
+import com.android.leacooking.data.model.room.Recipe
+import com.android.leacooking.data.model.room.RecipePart
 
 data class FullRecipe(
     @Embedded val recipe: Recipe,
