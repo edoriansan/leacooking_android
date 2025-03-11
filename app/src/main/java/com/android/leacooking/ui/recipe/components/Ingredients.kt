@@ -19,7 +19,7 @@ fun Ingredients(recipePart: RecipePartWithIngredients) {
     if (recipePart.ingredients.isNotEmpty()) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(32.dp, 8.dp)
                 .fillMaxWidth()
         ) {
             Text(

@@ -55,4 +55,16 @@ interface RecipeDao {
 
     @Query("SELECT * FROM recipe WHERE id = :recipeId")
     suspend fun getRecipeById(recipeId: Long): Recipe
+
+    @Query("""
+    SELECT DISTINCT r.id, title, image_url AS imageUrl, id_subcategory AS recipeSubcategoryId 
+    FROM recipe r
+    JOIN recipe_part rp ON r.id = rp.id_recipe
+    JOIN recipe_part_ingredient rpi ON rp.id = rpi.id_recipe_part
+    JOIN ingredient i ON rpi.id_ingredient = i.id
+    WHERE LOWER(r.title) LIKE LOWER('%' || :query || '%')
+    OR LOWER(i.ingredient_label) LIKE LOWER('%' || :query || '%')
+    """)
+    suspend fun searchRecipesByIngredient(query: String): List<RecipePreview>
+
 }

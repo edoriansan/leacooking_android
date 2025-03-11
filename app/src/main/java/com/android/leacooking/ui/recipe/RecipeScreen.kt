@@ -4,7 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -77,6 +80,24 @@ fun RecipeScreen(
                     }
 
                     item {
+                        Row(
+                            horizontalArrangement = Arrangement.Start,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(16.dp).fillMaxWidth()
+                        ) {
+                            Text(
+                                text = recipe.recipe.persons.toString(),
+                                modifier = Modifier.padding(end = 8.dp)
+                            )
+                            Icon(
+                                imageVector = Icons.Default.Person,
+                                contentDescription = "Person Icon"
+                            )
+                        }
+                    }
+
+
+                    item {
                         TitleWithLine(text = "Ingrédients")
                     }
                     items(recipe.parts) { recipePart ->
@@ -115,6 +136,23 @@ fun RecipeScreen(
                             .padding(16.dp)
                             .fillMaxWidth()
                     )
+                }
+
+                item {
+                    Row(
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(16.dp).fillMaxWidth()
+                    ) {
+                        Text(
+                            text = recipe.recipe.persons.toString(),
+                            modifier = Modifier.padding(end = 8.dp)
+                        )
+                        Icon(
+                            imageVector = Icons.Default.Person,
+                            contentDescription = "Person Icon"
+                        )
+                    }
                 }
 
                 item {

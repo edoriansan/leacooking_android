@@ -50,7 +50,7 @@ fun ImageCard(imageUrl: String, label: String, modifier: Modifier, fontSize: Tex
                         Box(
                             Modifier
                                 .fillMaxSize()
-                                .background(Color.Red),
+                                .background(Color.LightGray),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(text = "Erreur", color = Color.White)
