@@ -14,7 +14,7 @@ import com.android.leacooking.data.model.room.RecipePartIngredient
 @Dao
 interface RecipeDao {
     @Query("""
-        SELECT r.*, rp.*, rpi.*, i.*, qt.label as quantityType
+        SELECT r.*, rp.*, rpi.*, i.*, qt.label as quantityType, r.id
         FROM recipe r
         JOIN recipe_part rp ON r.id = rp.id_recipe
         JOIN recipe_part_ingredient rpi ON rp.id = rpi.id_recipe_part
@@ -53,4 +53,6 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipePartIngredients(recipePartIngredients: List<RecipePartIngredient>)
 
+    @Query("SELECT * FROM recipe WHERE id = :recipeId")
+    suspend fun getRecipeById(recipeId: Long): Recipe
 }

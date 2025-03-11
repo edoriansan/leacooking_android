@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -76,26 +77,14 @@ fun RecipeScreen(
                     }
 
                     item {
-                        Text(
-                            text = "Ingrédients",
-                            fontFamily = customFontFamily,
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(16.dp)
-                        )
+                        TitleWithLine(text = "Ingrédients")
                     }
                     items(recipe.parts) { recipePart ->
                         Ingredients(recipePart = recipePart)
                     }
 
                     item {
-                        Text(
-                            text = "Étapes",
-                            fontFamily = customFontFamily,
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(16.dp)
-                        )
+                        TitleWithLine(text = "Étapes")
                     }
                     items(recipe.parts) { recipePart ->
                         RecipePart(recipePart = recipePart)
@@ -129,26 +118,14 @@ fun RecipeScreen(
                 }
 
                 item {
-                    Text(
-                        text = "Ingrédients",
-                        fontFamily = customFontFamily,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(16.dp)
-                    )
+                    TitleWithLine(text = "Ingrédients")
                 }
                 items(recipe.parts) { recipePart ->
                     Ingredients(recipePart = recipePart)
                 }
 
                 item {
-                    Text(
-                        text = "Étapes",
-                        fontFamily = customFontFamily,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(16.dp)
-                    )
+                    TitleWithLine(text = "Étapes")
                 }
                 items(recipe.parts.chunked(columns)) { rowItems ->
                     Row(
@@ -162,6 +139,32 @@ fun RecipeScreen(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun TitleWithLine(text: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 16.dp)
+    ) {
+        Text(
+            text = text,
+            fontFamily = customFontFamily,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(end = 8.dp)
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        HorizontalDivider(
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .height(1.dp),
+            color = Color.Gray
+        )
     }
 }
 

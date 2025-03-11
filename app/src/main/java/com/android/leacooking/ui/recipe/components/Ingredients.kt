@@ -16,30 +16,31 @@ import androidx.compose.material3.Text
 
 @Composable
 fun Ingredients(recipePart: RecipePartWithIngredients) {
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-    ) {
-        Text(
-            text = "Pour ${recipePart.part.recipePartTitle.lowercase()}",
-            fontSize = 20.sp,
-            fontFamily = customFontFamily,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-
+    if (recipePart.ingredients.isNotEmpty()) {
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
         ) {
-            recipePart.ingredients.forEach { ingredient ->
-                Text(
-                    text = "${ingredient.ingredient_label}: ${ingredient.quantity} ${ingredient.quantity_type_label ?: ""}",
-                    fontSize = 18.sp,
-                    fontFamily = customFontFamily,
-                    fontWeight = FontWeight.Normal
-                )
-                Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = recipePart.part.recipePartTitle,
+                fontSize = 20.sp,
+                fontFamily = customFontFamily,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                recipePart.ingredients.forEach { ingredient ->
+                    Text(
+                        text = "${ingredient.ingredient_label}: ${ingredient.quantity} ${ingredient.quantity_type_label ?: ""}",
+                        fontSize = 18.sp,
+                        fontFamily = customFontFamily,
+                        fontWeight = FontWeight.Normal
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                }
             }
         }
     }
