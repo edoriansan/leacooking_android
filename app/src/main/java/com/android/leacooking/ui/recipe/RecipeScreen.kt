@@ -12,10 +12,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.android.leacooking.ui.recipe.components.Ingredients
 import com.android.leacooking.ui.recipe.components.RecipePart
@@ -33,7 +33,7 @@ fun RecipeScreen(
         viewModel.loadRecipe(recipeId)
     }
 
-    val recipe by viewModel.recipe.collectAsState()
+    val recipe by viewModel.recipe.collectAsStateWithLifecycle()
     val isLandscape = isLandscape()
     val columns = if (isLandscape) 2 else 1
 
@@ -163,12 +163,6 @@ fun RecipeScreen(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-    RecipeScreen(recipeId = 1)
 }
 
 @Composable

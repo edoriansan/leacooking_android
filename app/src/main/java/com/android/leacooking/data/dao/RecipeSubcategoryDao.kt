@@ -18,4 +18,7 @@ interface RecipeSubcategoryDao {
 
     @Query("SELECT * FROM recipe_subcategory")
     fun getAllRecipeSubcategories(): List<RecipeSubcategory>
+
+    @Query("SELECT * FROM recipe_subcategory WHERE id_category  = :recipeCategoryId")
+    fun getSubcategoriesByCategoryId(recipeCategoryId: Long): List<RecipeSubcategory>
 }

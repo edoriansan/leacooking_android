@@ -24,7 +24,8 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            categoryDao.getAllRecipeCategories()
+            categoryDao
+                .getAllRecipeCategories()
                 .collect { categoriesList ->
                     _categories.value = categoriesList
                 }

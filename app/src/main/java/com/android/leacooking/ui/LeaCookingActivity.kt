@@ -27,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.android.leacooking.ui.MainNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -105,5 +104,3 @@ fun DrawerStateDemo(modifier: Modifier = Modifier) {
     }
     // [END android_compose_layout_material_modal_drawer_programmatic]
 }
-
-

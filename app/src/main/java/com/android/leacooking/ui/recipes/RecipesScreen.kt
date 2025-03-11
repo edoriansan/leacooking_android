@@ -1,6 +1,5 @@
 package com.android.leacooking.ui.recipes
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,11 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.android.leacooking.ui.Screen
 import com.android.leacooking.ui.shared.imageCard.ImageCard
 
-@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun RecipesScreen(
     modifier: Modifier = Modifier,
@@ -26,7 +25,7 @@ fun RecipesScreen(
         viewModel.loadRecipes(recipeSubcategoryId)
     }
 
-    val recipes by viewModel.recipes.collectAsState()
+    val recipes by viewModel.recipes.collectAsStateWithLifecycle()
     val isLandscape = isLandscape()
     val columns = if (isLandscape) 3 else 2
 

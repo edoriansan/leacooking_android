@@ -4,8 +4,12 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.android.leacooking.data.model.custom.FullRecipe
+import com.android.leacooking.data.model.custom.RecipePreview
 import com.android.leacooking.data.model.room.Recipe
+import com.android.leacooking.data.model.room.RecipePart
+import com.android.leacooking.data.model.room.RecipePartIngredient
 
 @Dao
 interface RecipeDao {
@@ -28,4 +32,25 @@ interface RecipeDao {
 
     @Query("SELECT * FROM recipe")
     fun getAllRecipes(): List<Recipe>
+
+    @Query("SELECT id, title, image_url AS imageUrl, id_subcategory AS recipeSubcategoryId FROM recipe WHERE id_subcategory = :recipeSubcategoryId")
+    fun getRecipesBySubcategoryId(recipeSubcategoryId: Long): List<RecipePreview>
+
+    @Transaction
+    suspend fun insertRecipesWithPartsAndIngredients(
+        recipes: List<Recipe>,
+        recipeParts: List<RecipePart>,
+        recipePartIngredients: List<RecipePartIngredient>
+    ) {
+        insertAll(recipes)
+        insertRecipeParts(recipeParts)
+        insertRecipePartIngredients(recipePartIngredients)
+    }
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRecipeParts(recipeParts: List<RecipePart>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRecipePartIngredients(recipePartIngredients: List<RecipePartIngredient>)
+
 }
