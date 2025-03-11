@@ -1,6 +1,5 @@
 package com.android.leacooking.ui.subcategories
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -9,11 +8,11 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.android.leacooking.ui.Screen
 import com.android.leacooking.ui.shared.imageCard.ImageCard
 
-@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun SubCategoriesScreen(
     modifier: Modifier = Modifier,
@@ -25,7 +24,7 @@ fun SubCategoriesScreen(
         viewModel.loadSubCategories(categoryId)
     }
 
-    val subCategories by viewModel.subCategories.collectAsState()
+    val subCategories by viewModel.subCategories.collectAsStateWithLifecycle()
 
     val isLandscape = isLandscape()
     val columns = if (isLandscape) 3 else 2
