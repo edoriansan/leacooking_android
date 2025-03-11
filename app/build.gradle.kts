@@ -72,6 +72,10 @@ dependencies {
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)
     implementation(libs.coil.compose)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.converter.moshi)
+    implementation(libs.moshi)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     implementation(libs.navigation.compose)
     implementation(libs.compose.ui)

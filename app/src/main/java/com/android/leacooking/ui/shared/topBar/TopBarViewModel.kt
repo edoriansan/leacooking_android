@@ -9,6 +9,4 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TopBarViewModel @Inject constructor(
-) : ViewModel() {
-    var user by mutableStateOf("")
-}
+) : ViewModel() {}
