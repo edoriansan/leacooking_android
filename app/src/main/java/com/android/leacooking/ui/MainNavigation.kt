@@ -44,9 +44,13 @@ fun MainNavigation() {
     val context = LocalContext.current
 
     fun handleSearch(query: String) {
-        Toast.makeText(context, "Recherche pour : $query", Toast.LENGTH_SHORT).show()
-        isSearchDialogOpen = false
-        navController.navigate("recipes_search/$query")
+        if (query.isEmpty()) {
+            Toast.makeText(context, "Veuillez saisir quelque chose pour la recherche...", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Recherche pour : $query", Toast.LENGTH_SHORT).show()
+            isSearchDialogOpen = false
+            navController.navigate("recipes_search/$query")
+        }
     }
 
     Scaffold(
