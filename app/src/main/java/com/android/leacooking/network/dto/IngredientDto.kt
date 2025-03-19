@@ -4,6 +4,5 @@ import com.squareup.moshi.Json
 
 data class IngredientDto(
     @Json(name = "id") val id: Long,
-    @Json(name = "label") val label: String,
-    @Json(name = "quantityTypeId") val quantityTypeId: Long?
+    @Json(name = "label") val label: String
 )

@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.android.leacooking.data.dao.IngredientDao
-import com.android.leacooking.data.dao.QuantityTypeDao
 import com.android.leacooking.data.dao.RecipeDao
 import com.android.leacooking.data.dao.RecipePartDao
 import com.android.leacooking.data.dao.RecipePartIngredientDao
@@ -15,7 +14,6 @@ import com.android.leacooking.data.model.custom.IngredientWithQuantity
 import com.android.leacooking.data.model.room.Recipe
 import com.android.leacooking.data.model.room.RecipeCategory
 import com.android.leacooking.data.model.room.Ingredient
-import com.android.leacooking.data.model.room.QuantityType
 import com.android.leacooking.data.model.room.RecipePart
 import com.android.leacooking.data.model.room.RecipePartIngredient
 import com.android.leacooking.data.model.room.RecipeSubcategory
@@ -30,8 +28,7 @@ import com.android.leacooking.data.model.room.RecipeSubcategory
         Ingredient::class,
         RecipePartIngredient::class,
         RecipeCategory::class,
-        RecipeSubcategory::class,
-        QuantityType::class
+        RecipeSubcategory::class
     ],
     views = [
         IngredientWithQuantity::class
@@ -44,7 +41,6 @@ abstract class LeaCookingDatabase : RoomDatabase() {
     abstract fun recipeDao(): RecipeDao
     abstract fun recipePartDao(): RecipePartDao
     abstract fun ingredientDao(): IngredientDao
-    abstract fun quantityTypeDao(): QuantityTypeDao
     abstract fun recipePartIngredientDao(): RecipePartIngredientDao
     abstract fun categoryDao(): RecipeCategoryDao
     abstract fun recipeRecipeSubcategoryDao(): RecipeSubcategoryDao
