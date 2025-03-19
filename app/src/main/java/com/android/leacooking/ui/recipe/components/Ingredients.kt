@@ -34,7 +34,7 @@ fun Ingredients(recipePart: RecipePartWithIngredients) {
             ) {
                 recipePart.ingredients.forEach { ingredient ->
                     Text(
-                        text = "${ingredient.ingredient_label}: ${ingredient.quantity} ${ingredient.quantity_type_label ?: ""}",
+                        text = "${ingredient.ingredient_label} ${ingredient.quantity ?: ""}",
                         fontSize = 18.sp,
                         fontFamily = customFontFamily,
                         fontWeight = FontWeight.Normal
