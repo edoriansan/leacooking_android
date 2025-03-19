@@ -22,13 +22,6 @@ fun RecipePart(recipePart: RecipePartWithIngredients) {
             .fillMaxWidth()
     ) {
         Text(
-            text = recipePart.part.recipePartTitle,
-            fontSize = 20.sp,
-            fontFamily = customFontFamily,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
             text = recipePart.part.recipePartProcess,
             fontFamily = customFontFamily,
             fontSize = 16.sp

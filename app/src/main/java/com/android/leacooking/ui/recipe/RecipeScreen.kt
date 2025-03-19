@@ -20,7 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
+import coil.compose.SubcomposeAsyncImageContent
 import com.android.leacooking.ui.recipe.components.Ingredients
 import com.android.leacooking.ui.recipe.components.RecipePart
 import com.android.leacooking.ui.theme.customFontFamily
@@ -49,14 +50,26 @@ fun RecipeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                AsyncImage(
+                SubcomposeAsyncImage(
                     model = recipe.recipe.recipeImg,
                     contentDescription = "Image de la recette",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
+                        .fillMaxWidth()
                         .weight(1f)
-                        .fillMaxHeight()
-                )
+                ) {
+                    when (painter.state) {
+                        is coil.compose.AsyncImagePainter.State.Error -> {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(Color.LightGray)
+                            )
+                        }
+                        else -> SubcomposeAsyncImageContent()
+                    }
+                }
+
                 LazyColumn(
                     modifier = Modifier
                         .weight(4f)
@@ -96,7 +109,6 @@ fun RecipeScreen(
                         }
                     }
 
-
                     item {
                         TitleWithLine(text = "Ingrédients")
                     }
@@ -113,14 +125,26 @@ fun RecipeScreen(
                 }
             }
         } else {
-            AsyncImage(
+            SubcomposeAsyncImage(
                 model = recipe.recipe.recipeImg,
                 contentDescription = "Image de la recette",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-            )
+            ) {
+                when (painter.state) {
+                    is coil.compose.AsyncImagePainter.State.Error -> {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color.LightGray)
+                        )
+                    }
+                    else -> SubcomposeAsyncImageContent()
+                }
+            }
+
             LazyColumn(
                 modifier = Modifier.fillMaxSize().weight(3f).background(Color.White),
                 horizontalAlignment = Alignment.CenterHorizontally

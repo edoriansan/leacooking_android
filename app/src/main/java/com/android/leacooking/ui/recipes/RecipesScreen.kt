@@ -40,19 +40,25 @@ fun RecipesScreen(
                 .padding(8.dp),
         ) {
             items(recipes.chunked(columns)) { rowItems ->
-                Row{
-                    rowItems.forEach { recipe ->
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    rowItems.forEachIndexed { _, recipe ->
                         ImageCard(
                             imageUrl = recipe.imageUrl,
                             label = recipe.title,
                             modifier = Modifier
-                                .weight(1f)
                                 .height(cardSize)
+                                .weight(1f)
                                 .padding(5.dp)
                                 .clickable {
                                     navController.navigate("${Screen.RECIPE.route}/${recipe.id}")
                                 },
                         )
+                    }
+
+                    if (rowItems.size < columns) {
+                        Spacer(modifier = Modifier.weight(1f))
                     }
                 }
             }

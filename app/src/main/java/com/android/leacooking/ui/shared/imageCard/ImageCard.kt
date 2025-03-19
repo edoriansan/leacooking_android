@@ -50,11 +50,8 @@ fun ImageCard(imageUrl: String, label: String, modifier: Modifier, fontSize: Tex
                         Box(
                             Modifier
                                 .fillMaxSize()
-                                .background(Color.LightGray),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(text = "Erreur", color = Color.White)
-                        }
+                                .background(Color.LightGray)
+                        )
                     }
                     else -> SubcomposeAsyncImageContent()
                 }
@@ -64,7 +61,7 @@ fun ImageCard(imageUrl: String, label: String, modifier: Modifier, fontSize: Tex
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(1.dp), // Padding autour du texte
+                    .padding(1.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(

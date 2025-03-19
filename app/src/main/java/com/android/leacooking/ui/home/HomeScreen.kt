@@ -44,7 +44,7 @@ fun HomeScreen(
     ) {
         val cardHeight: Dp = maxHeight / (if (isLandscape) 1 else 2)
 
-        LaunchedEffect(key1 = true) {
+        LaunchedEffect(Unit){
             viewModel.synchronisation()
         }
 
