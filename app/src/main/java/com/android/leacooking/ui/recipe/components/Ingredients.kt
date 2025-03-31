@@ -19,22 +19,15 @@ fun Ingredients(recipePart: RecipePartWithIngredients) {
     if (recipePart.ingredients.isNotEmpty()) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(32.dp, 8.dp)
                 .fillMaxWidth()
         ) {
-            Text(
-                text = recipePart.part.recipePartTitle,
-                fontSize = 20.sp,
-                fontFamily = customFontFamily,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.height(8.dp))
             Column(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 recipePart.ingredients.forEach { ingredient ->
                     Text(
-                        text = "${ingredient.ingredient_label}: ${ingredient.quantity} ${ingredient.quantity_type_label ?: ""}",
+                        text = "${ingredient.quantity ?: ""} ${ingredient.ingredient_label}",
                         fontSize = 18.sp,
                         fontFamily = customFontFamily,
                         fontWeight = FontWeight.Normal

@@ -9,8 +9,5 @@ data class Ingredient(
     val id: Long,
 
     @ColumnInfo(name = "ingredient_label")
-    val label: String,
-
-    @ColumnInfo(name = "id_quantity_type")
-    val quantityTypeId: Long?
+    val label: String
 )
