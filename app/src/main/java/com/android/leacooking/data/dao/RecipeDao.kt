@@ -14,12 +14,11 @@ import com.android.leacooking.data.model.room.RecipePartIngredient
 @Dao
 interface RecipeDao {
     @Query("""
-        SELECT r.*, rp.*, rpi.*, i.*, qt.label as quantityType, r.id
+        SELECT r.*, rp.*, rpi.*, i.*, r.id
         FROM recipe r
         JOIN recipe_part rp ON r.id = rp.id_recipe
         JOIN recipe_part_ingredient rpi ON rp.id = rpi.id_recipe_part
         JOIN ingredient i ON rpi.id_ingredient = i.id
-        JOIN quantity_type qt ON i.id_quantity_type = qt.id
         WHERE r.id = :recipeId
     """)
     suspend fun getFullRecipe(recipeId: Long): FullRecipe
@@ -55,4 +54,16 @@ interface RecipeDao {
 
     @Query("SELECT * FROM recipe WHERE id = :recipeId")
     suspend fun getRecipeById(recipeId: Long): Recipe
+
+    @Query("""
+    SELECT DISTINCT r.id, title, image_url AS imageUrl, id_subcategory AS recipeSubcategoryId 
+    FROM recipe r
+    JOIN recipe_part rp ON r.id = rp.id_recipe
+    JOIN recipe_part_ingredient rpi ON rp.id = rpi.id_recipe_part
+    JOIN ingredient i ON rpi.id_ingredient = i.id
+    WHERE LOWER(r.title) LIKE LOWER('%' || :query || '%')
+    OR LOWER(i.ingredient_label) LIKE LOWER('%' || :query || '%')
+    """)
+    suspend fun searchRecipesByIngredient(query: String): List<RecipePreview>
+
 }

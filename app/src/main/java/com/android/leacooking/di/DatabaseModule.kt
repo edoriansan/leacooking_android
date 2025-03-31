@@ -3,7 +3,6 @@ package com.android.leacooking.data.di
 import android.content.Context
 import com.android.leacooking.data.LeaCookingDatabase
 import com.android.leacooking.data.dao.IngredientDao
-import com.android.leacooking.data.dao.QuantityTypeDao
 import com.android.leacooking.data.dao.RecipeCategoryDao
 import com.android.leacooking.data.dao.RecipeDao
 import com.android.leacooking.data.dao.RecipePartDao
@@ -59,10 +58,5 @@ object DatabaseModule {
     @Provides
     fun provideRecipeSubcategoryDao(database: LeaCookingDatabase): RecipeSubcategoryDao {
         return database.recipeRecipeSubcategoryDao()
-    }
-
-    @Provides
-    fun provideQuantityTypeDao(database: LeaCookingDatabase): QuantityTypeDao {
-        return database.quantityTypeDao()
     }
 }

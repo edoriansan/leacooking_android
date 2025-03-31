@@ -7,8 +7,7 @@ object IngredientMapper {
     fun mapTo(dto: IngredientDto): Ingredient {
         return Ingredient(
             id = dto.id,
-            label = dto.label,
-            quantityTypeId = dto.quantityTypeId
+            label = dto.label
         )
     }
 

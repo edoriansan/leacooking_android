@@ -1,4 +1,4 @@
-package com.android.leacooking.ui.recipes
+package com.android.leacooking.ui.recipes.search
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,20 +12,21 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.android.leacooking.ui.Screen
+import com.android.leacooking.ui.recipes.isLandscape
 import com.android.leacooking.ui.shared.imageCard.ImageCard
 
 @Composable
-fun RecipesScreen(
+fun RecipesSearchScreen(
     modifier: Modifier = Modifier,
-    recipeSubcategoryId: Long,
     navController: NavController,
-    viewModel: RecipesViewModel = hiltViewModel()
+    query: String,
+    viewModel: RecipeSearchViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(recipeSubcategoryId) {
-        viewModel.loadRecipes(recipeSubcategoryId)
+    LaunchedEffect(query) {
+        viewModel.searchRecipes(query)
     }
 
-    val recipes by viewModel.recipes.collectAsStateWithLifecycle()
+    val recipes by viewModel.searchResults.collectAsStateWithLifecycle()
     val isLandscape = isLandscape()
     val columns = if (isLandscape) 3 else 2
 
@@ -40,34 +41,22 @@ fun RecipesScreen(
                 .padding(8.dp),
         ) {
             items(recipes.chunked(columns)) { rowItems ->
-                Row(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    rowItems.forEachIndexed { _, recipe ->
+                Row{
+                    rowItems.forEach { recipe ->
                         ImageCard(
                             imageUrl = recipe.imageUrl,
                             label = recipe.title,
                             modifier = Modifier
-                                .height(cardSize)
                                 .weight(1f)
+                                .height(cardSize)
                                 .padding(5.dp)
                                 .clickable {
                                     navController.navigate("${Screen.RECIPE.route}/${recipe.id}")
                                 },
                         )
                     }
-
-                    if (rowItems.size < columns) {
-                        Spacer(modifier = Modifier.weight(1f))
-                    }
                 }
             }
         }
     }
-}
-
-@Composable
-fun isLandscape(): Boolean {
-    val configuration = androidx.compose.ui.platform.LocalConfiguration.current
-    return configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
 }
