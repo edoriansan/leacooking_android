@@ -1,4 +1,4 @@
-package com.android.leacooking.ui.home.viewmodel
+package com.android.leacooking.ui.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -18,8 +18,8 @@ class HomeViewModel @Inject constructor(
     private val synchronizationRepository: SynchronizationRepository
 ) : ViewModel() {
     private val _categories = MutableStateFlow<List<RecipeCategory>>(emptyList())
+    private var isSyncInProgress = MutableStateFlow(false)
     val categories: StateFlow<List<RecipeCategory>> = _categories
-
     var showSyncProgressDialog = MutableStateFlow<Boolean>(false)
 
     init {
@@ -33,16 +33,16 @@ class HomeViewModel @Inject constructor(
     }
 
     fun synchronisation() {
-        Log.i("Data", "Démarrage de la synchronisation")
-        setShowSyncProgressDialog(true)
-
-        // Lance la synchronisation dans un coroutine
+        if (isSyncInProgress.value) return
         viewModelScope.launch {
             try {
+                isSyncInProgress.value = true
+                setShowSyncProgressDialog(true)
                 synchronizationRepository.syncAllData()
             } catch (e: Exception) {
                 Log.e("Sync", "Erreur de synchronisation: ${e.message}")
             } finally {
+                isSyncInProgress.value = false
                 setShowSyncProgressDialog(false)
             }
         }

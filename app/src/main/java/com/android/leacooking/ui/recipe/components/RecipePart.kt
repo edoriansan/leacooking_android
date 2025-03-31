@@ -18,16 +18,9 @@ import com.android.leacooking.ui.theme.customFontFamily
 fun RecipePart(recipePart: RecipePartWithIngredients) {
     Column(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(32.dp, 8.dp)
             .fillMaxWidth()
     ) {
-        Text(
-            text = recipePart.part.recipePartTitle,
-            fontSize = 20.sp,
-            fontFamily = customFontFamily,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = recipePart.part.recipePartProcess,
             fontFamily = customFontFamily,
