@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -18,10 +19,22 @@ import coil.compose.AsyncImage
 @Composable
 fun TopBar(
     onSearchClick: () -> Unit,
-    onHomeClick: () -> Unit
+    onHomeClick: () -> Unit,
+    canGoBack: Boolean,
+    onBackClick: () -> Unit
 ) {
     TopAppBar(
         modifier = Modifier.shadow(8.dp),
+        navigationIcon = {
+            if (canGoBack) {
+                IconButton(onClick = onBackClick) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                        contentDescription = "Retour"
+                    )
+                }
+            }
+        },
         title = {
             Box(
                 modifier = Modifier

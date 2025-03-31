@@ -61,7 +61,9 @@ fun MainNavigation() {
                     navController.navigate(Screen.HOME.route) {
                         popUpTo(Screen.HOME.route) { inclusive = true }
                     }
-                }
+                },
+                canGoBack = navController.previousBackStackEntry != null,
+                onBackClick = { navController.popBackStack() }
             )
         }
     ) { innerPadding ->
