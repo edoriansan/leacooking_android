@@ -17,6 +17,9 @@ data class Recipe(
     @ColumnInfo(name = "image_url")
     val recipeImg: String,
 
+    @ColumnInfo(name = "description")
+    val description: String,
+
     @ColumnInfo(name = "id_subcategory")
     val recipeSubcategoryId: Long
 )

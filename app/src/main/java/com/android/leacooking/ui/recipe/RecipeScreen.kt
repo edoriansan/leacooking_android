@@ -22,10 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
-import com.android.leacooking.ui.recipe.components.Ingredients
-import com.android.leacooking.ui.recipe.components.RecipePart
 import com.android.leacooking.ui.theme.customFontFamily
-import kotlin.collections.chunked
 import kotlin.collections.forEach
 
 @Composable
@@ -112,15 +109,44 @@ fun RecipeScreen(
                     item {
                         TitleWithLine(text = "Ingrédients")
                     }
-                    items(recipe.parts) { recipePart ->
-                        Ingredients(recipePart = recipePart)
+                    if (recipe.ingredients.isNotEmpty()) {
+                        item {
+                            Column(
+                                modifier = Modifier
+                                    .padding(32.dp, 8.dp)
+                                    .fillMaxWidth()
+                            ) {
+                                Column(
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    recipe.ingredients.forEach { ingredient ->
+                                        Text(
+                                            text = "${ingredient.quantity ?: ""} ${ingredient.ingredient_label}",
+                                            fontSize = 18.sp,
+                                            fontFamily = customFontFamily,
+                                            fontWeight = FontWeight.Normal
+                                        )
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     item {
                         TitleWithLine(text = "Recette")
                     }
-                    items(recipe.parts) { recipePart ->
-                        RecipePart(recipePart = recipePart)
+                    item {
+                        Row(
+                            horizontalArrangement = Arrangement.Start,
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(16.dp).fillMaxWidth()
+                        ) {
+                            Text(
+                                text = recipe.recipe.description,
+                                modifier = Modifier.padding(end = 8.dp)
+                            )
+                        }
                     }
                 }
             }
@@ -183,21 +209,43 @@ fun RecipeScreen(
                 item {
                     TitleWithLine(text = "Ingrédients")
                 }
-                items(recipe.parts) { recipePart ->
-                    Ingredients(recipePart = recipePart)
+                if (recipe.ingredients.isNotEmpty()) {
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .padding(32.dp, 8.dp)
+                                .fillMaxWidth()
+                        ) {
+                            Column(
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                recipe.ingredients.forEach { ingredient ->
+                                    Text(
+                                        text = "${ingredient.quantity ?: ""} ${ingredient.ingredient_label}",
+                                        fontSize = 18.sp,
+                                        fontFamily = customFontFamily,
+                                        fontWeight = FontWeight.Normal
+                                    )
+                                    Spacer(modifier = Modifier.height(4.dp))
+                                }
+                            }
+                        }
+                    }
                 }
 
                 item {
                     TitleWithLine(text = "Recette")
                 }
-                items(recipe.parts.chunked(columns)) { rowItems ->
+                item {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(16.dp).fillMaxWidth()
                     ) {
-                        rowItems.forEach { recipePart ->
-                            RecipePart(recipePart = recipePart)
-                        }
+                        Text(
+                            text = recipe.recipe.description,
+                            modifier = Modifier.padding(end = 8.dp)
+                        )
                     }
                 }
             }

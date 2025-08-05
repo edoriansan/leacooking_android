@@ -11,5 +11,5 @@ data class FullRecipe(
         parentColumn = "id",
         entityColumn = "id_recipe"
     )
-    val parts: List<RecipeWithIngredients>
+    val ingredients: List<IngredientWithQuantity>
 )
