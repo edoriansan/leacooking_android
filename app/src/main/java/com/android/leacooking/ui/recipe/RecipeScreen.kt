@@ -117,7 +117,7 @@ fun RecipeScreen(
                     }
 
                     item {
-                        TitleWithLine(text = "Étapes")
+                        TitleWithLine(text = "Recette")
                     }
                     items(recipe.parts) { recipePart ->
                         RecipePart(recipePart = recipePart)
@@ -159,6 +159,7 @@ fun RecipeScreen(
                             .background(Color(251,194,181))
                             .padding(16.dp)
                             .fillMaxWidth()
+
                     )
                 }
 
@@ -187,7 +188,7 @@ fun RecipeScreen(
                 }
 
                 item {
-                    TitleWithLine(text = "Étapes")
+                    TitleWithLine(text = "Recette")
                 }
                 items(recipe.parts.chunked(columns)) { rowItems ->
                     Row(

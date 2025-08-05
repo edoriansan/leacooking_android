@@ -8,5 +8,5 @@ data class RecipeDto(
     @Json(name = "persons") val persons: Int,
     @Json(name = "recipeImg") val recipeImg: String,
     @Json(name = "recipeSubcategoryId") val recipeSubcategoryId: Long,
-    @Json(name = "recipeParts") val recipeParts: List<RecipePartDto>
+    @Json(name = "recipeIngredients") val recipeIngredients: List<RecipeIngredientDto>
 )

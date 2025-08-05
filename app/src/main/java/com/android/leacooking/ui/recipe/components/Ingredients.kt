@@ -10,12 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.android.leacooking.data.model.custom.RecipePartWithIngredients
+import com.android.leacooking.data.model.custom.RecipeWithIngredients
 import com.android.leacooking.ui.theme.customFontFamily
 import androidx.compose.material3.Text
 
 @Composable
-fun Ingredients(recipePart: RecipePartWithIngredients) {
+fun Ingredients(recipePart: RecipeWithIngredients) {
     if (recipePart.ingredients.isNotEmpty()) {
         Column(
             modifier = Modifier
