@@ -96,7 +96,7 @@ fun RecipeScreen(
                             modifier = Modifier.padding(16.dp).fillMaxWidth()
                         ) {
                             Text(
-                                text = recipe.recipe.persons.toString(),
+                                text = recipe.recipe.parts.toString(),
                                 modifier = Modifier.padding(end = 8.dp)
                             )
                             Icon(
@@ -121,7 +121,7 @@ fun RecipeScreen(
                                 ) {
                                     recipe.ingredients.forEach { ingredient ->
                                         Text(
-                                            text = "${ingredient.quantity ?: ""} ${ingredient.ingredient_label}",
+                                            text = "${ingredient.quantity ?: ""} ${ingredient.ingredient_label.lowercase()}",
                                             fontSize = 18.sp,
                                             fontFamily = customFontFamily,
                                             fontWeight = FontWeight.Normal
@@ -196,7 +196,7 @@ fun RecipeScreen(
                         modifier = Modifier.padding(16.dp).fillMaxWidth()
                     ) {
                         Text(
-                            text = recipe.recipe.persons.toString(),
+                            text = recipe.recipe.parts.toString(),
                             modifier = Modifier.padding(end = 8.dp)
                         )
                         Icon(

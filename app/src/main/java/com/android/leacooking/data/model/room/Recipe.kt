@@ -11,8 +11,8 @@ data class Recipe(
     @ColumnInfo(name = "title")
     val title: String,
 
-    @ColumnInfo(name = "persons")
-    val persons: Int?,
+    @ColumnInfo(name = "parts")
+    val parts: Int?,
 
     @ColumnInfo(name = "image_url")
     val recipeImg: String,

@@ -19,8 +19,8 @@ class RecipeViewModel @Inject constructor(
 
     private val _recipe = MutableStateFlow<FullRecipe>(
         FullRecipe(
-            recipe = Recipe(id = -1, title = "Recette non trouvée", recipeImg = "", persons = 0, recipeSubcategoryId = 0),
-            parts = listOf()
+            recipe = Recipe(id = -1, title = "Recette non trouvée", recipeImg = "", parts = 0, recipeSubcategoryId = 0, description = ""),
+            ingredients = listOf()
         )
     )
     val recipe: StateFlow<FullRecipe> get() = _recipe
@@ -33,8 +33,8 @@ class RecipeViewModel @Inject constructor(
                 _recipe.value = fullRecipe
             } catch (e: Exception) {
                 _recipe.value = FullRecipe(
-                    recipe = Recipe(id = -1, title = "Recette non trouvée", recipeImg = "", persons = 0, recipeSubcategoryId = 0),
-                    parts = listOf()
+                    recipe = Recipe(id = -1, title = "Recette non trouvée", recipeImg = "", parts = 0, recipeSubcategoryId = 0, description = ""),
+                    ingredients = listOf()
                 )
             }
         }
