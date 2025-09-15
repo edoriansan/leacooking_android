@@ -4,15 +4,15 @@ import androidx.room.DatabaseView
 
 @DatabaseView("""
     SELECT 
-        rpi.id_recipe_part, 
+        ri.id_recipe, 
         i.id AS id_ingredient, 
         i.ingredient_label,
-        rpi.quantity
-    FROM recipe_part_ingredient rpi
-    JOIN ingredient i ON rpi.id_ingredient = i.id
+        ri.quantity
+    FROM recipe_ingredient ri
+    JOIN ingredient i ON ri.id_ingredient = i.id
 """)
 data class IngredientWithQuantity(
-    val id_recipe_part: Long,
+    val id_recipe: Long,
     val id_ingredient: Long,
     val ingredient_label: String,
     val quantity: String?
