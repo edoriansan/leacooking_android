@@ -7,9 +7,8 @@ import com.android.leacooking.data.dao.RecipeDao
 import com.android.leacooking.data.dao.RecipeSubcategoryDao
 import com.android.leacooking.data.mapper.IngredientMapper
 import com.android.leacooking.data.mapper.RecipeCategoryMapper
+import com.android.leacooking.data.mapper.RecipeIngredientMapper
 import com.android.leacooking.data.mapper.RecipeMapper
-import com.android.leacooking.data.mapper.RecipePartIngredientMapper
-import com.android.leacooking.data.mapper.RecipePartMapper
 import com.android.leacooking.data.mapper.RecipeSubcategoryMapper
 import com.android.leacooking.network.service.ApiService
 import javax.inject.Inject
@@ -76,15 +75,10 @@ class SynchronizationRepository @Inject constructor(
             if (response.isSuccessful) {
                 val recipesFromApi = response.body() ?: emptyList()
                 val recipeEntities = RecipeMapper.mapToEntities(recipesFromApi)
-                val recipePartEntities = recipesFromApi.flatMap { recipe ->
-                    recipe.recipeParts.map { RecipePartMapper.mapTo(it) }
+                val recipeIngredientEntities = recipesFromApi.flatMap { recipe ->
+                    recipe.recipeIngredients.map { RecipeIngredientMapper.mapTo(it) }
                 }
-                val recipePartIngredientEntities = recipesFromApi.flatMap { recipe ->
-                    recipe.recipeParts.flatMap { part ->
-                        part.recipePartIngredients.map { RecipePartIngredientMapper.mapTo(it) }
-                    }
-                }
-                recipeDao.insertRecipesWithPartsAndIngredients(recipeEntities, recipePartEntities, recipePartIngredientEntities)
+                recipeDao.insertRecipesWithPartsAndIngredients(recipeEntities, recipeIngredientEntities)
                 Log.d("Sync", "Recipes sync: ${recipesFromApi.size} recipes")
             } else {
                 Log.e("Sync", "Failed to sync recipes: HTTP ${response.code()} - ${response.message()}")

@@ -4,12 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 
 @Entity(
-    tableName = "recipe_part_ingredient",
-    primaryKeys = ["id_recipe_part", "id_ingredient"]
+    tableName = "recipe_ingredient",
+    primaryKeys = ["id_recipe", "id_ingredient"]
 )
-data class RecipePartIngredient(
-    @ColumnInfo(name = "id_recipe_part")
-    val recipePartId: Long,
+data class RecipeIngredient(
+    @ColumnInfo(name = "id_recipe")
+    val recipeId: Long,
 
     @ColumnInfo(name = "id_ingredient")
     val ingredientId: Long,
