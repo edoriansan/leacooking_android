@@ -34,7 +34,7 @@ interface RecipeDao {
     fun getRecipesBySubcategoryId(recipeSubcategoryId: Long): List<RecipePreview>
 
     @Transaction
-    suspend fun insertRecipesWithPartsAndIngredients(
+    suspend fun insertRecipeIngredients(
         recipes: List<Recipe>,
         recipeIngredients: List<RecipeIngredient>
     ) {

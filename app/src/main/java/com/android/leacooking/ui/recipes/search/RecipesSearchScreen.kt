@@ -51,17 +51,19 @@ fun RecipesSearchScreen(
                 items(recipes.chunked(columns)) { rowItems ->
                     Row {
                         rowItems.forEach { recipe ->
-                            ImageCard(
-                                imageUrl = recipe.imageUrl,
-                                label = recipe.title,
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .height(cardSize)
-                                    .padding(5.dp)
-                                    .clickable {
-                                        navController.navigate("${Screen.RECIPE.route}/${recipe.id}")
-                                    },
-                            )
+                            recipe.imageUrl?.let {
+                                ImageCard(
+                                    imageUrl = it,
+                                    label = recipe.title,
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(cardSize)
+                                        .padding(5.dp)
+                                        .clickable {
+                                            navController.navigate("${Screen.RECIPE.route}/${recipe.id}")
+                                        },
+                                )
+                            }
                         }
                     }
                 }

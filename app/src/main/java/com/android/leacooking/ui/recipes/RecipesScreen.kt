@@ -44,17 +44,19 @@ fun RecipesScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     rowItems.forEachIndexed { _, recipe ->
-                        ImageCard(
-                            imageUrl = recipe.imageUrl,
-                            label = recipe.title,
-                            modifier = Modifier
-                                .height(cardSize)
-                                .weight(1f)
-                                .padding(5.dp)
-                                .clickable {
-                                    navController.navigate("${Screen.RECIPE.route}/${recipe.id}")
-                                },
-                        )
+                        recipe.imageUrl?.let {
+                            ImageCard(
+                                imageUrl = it,
+                                label = recipe.title,
+                                modifier = Modifier
+                                    .height(cardSize)
+                                    .weight(1f)
+                                    .padding(5.dp)
+                                    .clickable {
+                                        navController.navigate("${Screen.RECIPE.route}/${recipe.id}")
+                                    },
+                            )
+                        }
                     }
 
                     if (rowItems.size < columns) {
