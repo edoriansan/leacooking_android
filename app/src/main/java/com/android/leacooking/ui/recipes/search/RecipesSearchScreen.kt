@@ -1,16 +1,23 @@
 package com.android.leacooking.ui.recipes.search
 
+import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.android.leacooking.R
 import com.android.leacooking.ui.Screen
 import com.android.leacooking.ui.recipes.isLandscape
 import com.android.leacooking.ui.shared.imageCard.ImageCard
@@ -35,28 +42,37 @@ fun RecipesSearchScreen(
     ) {
         val cardSize: Dp = maxHeight / (if (isLandscape) 3 else 4)
 
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp),
-        ) {
-            items(recipes.chunked(columns)) { rowItems ->
-                Row{
-                    rowItems.forEach { recipe ->
-                        ImageCard(
-                            imageUrl = recipe.imageUrl,
-                            label = recipe.title,
-                            modifier = Modifier
-                                .weight(1f)
-                                .height(cardSize)
-                                .padding(5.dp)
-                                .clickable {
-                                    navController.navigate("${Screen.RECIPE.route}/${recipe.id}")
-                                },
-                        )
+        if(recipes.isNotEmpty()) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp),
+            ) {
+                items(recipes.chunked(columns)) { rowItems ->
+                    Row {
+                        rowItems.forEach { recipe ->
+                            ImageCard(
+                                imageUrl = recipe.imageUrl,
+                                label = recipe.title,
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(cardSize)
+                                    .padding(5.dp)
+                                    .clickable {
+                                        navController.navigate("${Screen.RECIPE.route}/${recipe.id}")
+                                    },
+                            )
+                        }
                     }
                 }
             }
+        } else {
+            Image(
+                painter = painterResource(id = R.drawable.inouche),
+                contentDescription = "Vide",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
         }
     }
 }

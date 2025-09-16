@@ -8,8 +8,9 @@ object RecipeMapper {
         return Recipe(
             id = dto.id,
             title = dto.title,
+            description = dto.description,
             recipeImg = dto.recipeImg,
-            persons = dto.persons,
+            parts = dto.parts,
             recipeSubcategoryId = dto.recipeSubcategoryId
         )
     }

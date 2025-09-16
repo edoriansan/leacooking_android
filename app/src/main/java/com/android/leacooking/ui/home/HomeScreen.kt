@@ -24,6 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.android.leacooking.ui.Screen
+import com.android.leacooking.ui.home.components.CatLoadingSpinner
 import com.android.leacooking.ui.shared.imageCard.ImageCard
 import com.android.leacooking.ui.recipes.isLandscape
 import kotlin.collections.chunked
@@ -86,7 +87,10 @@ fun HomeScreen(
                     .background(Color.Black.copy(alpha = 0.3f)),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator(color = Color(251,194,181))
+                CatLoadingSpinner(
+                    modifier = Modifier
+                        .height(200.dp)
+                )
             }
         }
     }

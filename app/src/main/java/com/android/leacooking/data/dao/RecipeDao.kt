@@ -8,17 +8,15 @@ import androidx.room.Transaction
 import com.android.leacooking.data.model.custom.FullRecipe
 import com.android.leacooking.data.model.custom.RecipePreview
 import com.android.leacooking.data.model.room.Recipe
-import com.android.leacooking.data.model.room.RecipePart
-import com.android.leacooking.data.model.room.RecipePartIngredient
+import com.android.leacooking.data.model.room.RecipeIngredient
 
 @Dao
 interface RecipeDao {
     @Query("""
-        SELECT r.*, rp.*, rpi.*, i.*, r.id
+        SELECT r.*, ri.*, i.*, r.id
         FROM recipe r
-        JOIN recipe_part rp ON r.id = rp.id_recipe
-        JOIN recipe_part_ingredient rpi ON rp.id = rpi.id_recipe_part
-        JOIN ingredient i ON rpi.id_ingredient = i.id
+        JOIN recipe_ingredient ri ON ri.id_recipe = ri.id_recipe
+        JOIN ingredient i ON ri.id_ingredient = i.id
         WHERE r.id = :recipeId
     """)
     suspend fun getFullRecipe(recipeId: Long): FullRecipe
@@ -38,19 +36,14 @@ interface RecipeDao {
     @Transaction
     suspend fun insertRecipesWithPartsAndIngredients(
         recipes: List<Recipe>,
-        recipeParts: List<RecipePart>,
-        recipePartIngredients: List<RecipePartIngredient>
+        recipeIngredients: List<RecipeIngredient>
     ) {
         insertAll(recipes)
-        insertRecipeParts(recipeParts)
-        insertRecipePartIngredients(recipePartIngredients)
+        insertRecipeIngredients(recipeIngredients)
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipeParts(recipeParts: List<RecipePart>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipePartIngredients(recipePartIngredients: List<RecipePartIngredient>)
+    suspend fun insertRecipeIngredients(recipeIngredients: List<RecipeIngredient>)
 
     @Query("SELECT * FROM recipe WHERE id = :recipeId")
     suspend fun getRecipeById(recipeId: Long): Recipe
@@ -58,9 +51,8 @@ interface RecipeDao {
     @Query("""
     SELECT DISTINCT r.id, title, image_url AS imageUrl, id_subcategory AS recipeSubcategoryId 
     FROM recipe r
-    JOIN recipe_part rp ON r.id = rp.id_recipe
-    JOIN recipe_part_ingredient rpi ON rp.id = rpi.id_recipe_part
-    JOIN ingredient i ON rpi.id_ingredient = i.id
+    JOIN recipe_ingredient ri ON r.id = ri.id_recipe
+    JOIN ingredient i ON ri.id_ingredient = i.id
     WHERE LOWER(r.title) LIKE LOWER('%' || :query || '%')
     OR LOWER(i.ingredient_label) LIKE LOWER('%' || :query || '%')
     """)

@@ -2,14 +2,14 @@ package com.android.leacooking.data.model.custom
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.android.leacooking.data.model.room.RecipePart
+import com.android.leacooking.data.model.room.Recipe
 
-data class RecipePartWithIngredients(
-    @Embedded val part: RecipePart,
+data class RecipeWithIngredients(
+    @Embedded val recipe: Recipe,
 
     @Relation(
         parentColumn = "id",
-        entityColumn = "id_recipe_part"
+        entityColumn = "id_recipe"
     )
     val ingredients: List<IngredientWithQuantity>
 )

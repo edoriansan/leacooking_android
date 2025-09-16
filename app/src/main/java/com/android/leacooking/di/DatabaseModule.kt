@@ -5,8 +5,7 @@ import com.android.leacooking.data.LeaCookingDatabase
 import com.android.leacooking.data.dao.IngredientDao
 import com.android.leacooking.data.dao.RecipeCategoryDao
 import com.android.leacooking.data.dao.RecipeDao
-import com.android.leacooking.data.dao.RecipePartDao
-import com.android.leacooking.data.dao.RecipePartIngredientDao
+import com.android.leacooking.data.dao.RecipeIngredientDao
 import com.android.leacooking.data.dao.RecipeSubcategoryDao
 import dagger.Module
 import dagger.Provides
@@ -36,18 +35,13 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideRecipePartDao(database: LeaCookingDatabase): RecipePartDao {
-        return database.recipePartDao()
-    }
-
-    @Provides
     fun provideIngredientDao(database: LeaCookingDatabase): IngredientDao {
         return database.ingredientDao()
     }
 
     @Provides
-    fun provideRecipePartIngredientDao(database: LeaCookingDatabase): RecipePartIngredientDao {
-        return database.recipePartIngredientDao()
+    fun provideRecipeIngredientDao(database: LeaCookingDatabase): RecipeIngredientDao {
+        return database.recipeIngredientDao()
     }
 
     @Provides
