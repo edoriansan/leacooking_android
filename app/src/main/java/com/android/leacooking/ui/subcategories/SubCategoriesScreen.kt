@@ -2,9 +2,10 @@ package com.android.leacooking.ui.subcategories
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -12,6 +13,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.android.leacooking.ui.Screen
 import com.android.leacooking.ui.shared.imageCard.ImageCard
+import com.android.leacooking.ui.utils.isLandscape
 
 @Composable
 fun SubCategoriesScreen(
@@ -25,48 +27,47 @@ fun SubCategoriesScreen(
     }
 
     val subCategories by viewModel.subCategories.collectAsStateWithLifecycle()
-
     val isLandscape = isLandscape()
     val columns = if (isLandscape) 3 else 2
+    val padding = 6.dp
 
     BoxWithConstraints(
         modifier = modifier.fillMaxSize()
     ) {
-        val rows = if (isLandscape) 3 else 4
-        val cardHeight: Dp = maxHeight / rows
-        val cardWidth: Dp = maxWidth / columns
+        val cardHeight: Dp = maxHeight / (if (isLandscape) 3 else 4)
+        val cardWidth: Dp = (maxWidth - padding * (columns - 1)) / columns
 
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp),
         ) {
-            subCategories.chunked(columns).forEach { rowItems ->
+            items(subCategories.chunked(columns)) { rowItems ->
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(padding)
                 ) {
-                    rowItems.forEach { recipeSubcategory ->
+                    rowItems.forEach { subCategory ->
                         ImageCard(
-                            imageUrl = recipeSubcategory.recipeSubcategoryImg,
-                            label = recipeSubcategory.recipeSubcategoryLabel,
+                            imageUrl = subCategory.recipeSubcategoryImg,
+                            label = subCategory.recipeSubcategoryLabel,
                             modifier = Modifier
-                                .width(cardWidth)
+                                .weight(1f)
                                 .height(cardHeight)
-                                .padding(4.dp)
+                                .padding(3.dp)
                                 .clickable {
-                                    navController.navigate("${Screen.RECIPES.route}/${recipeSubcategory.id}")
-                                },
+                                    navController.navigate("${Screen.RECIPES.route}/${subCategory.id}")
+                                }
                         )
+                    }
+
+                    if (rowItems.size < columns) {
+                        repeat(columns - rowItems.size) {
+                            Spacer(modifier = Modifier.width(cardWidth))
+                        }
                     }
                 }
             }
         }
     }
-}
-
-@Composable
-fun isLandscape(): Boolean {
-    val configuration = LocalConfiguration.current
-    return configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
 }

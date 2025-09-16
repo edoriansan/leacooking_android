@@ -13,6 +13,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.android.leacooking.ui.Screen
 import com.android.leacooking.ui.shared.imageCard.ImageCard
+import com.android.leacooking.ui.utils.isLandscape
 
 @Composable
 fun RecipesScreen(
@@ -66,10 +67,4 @@ fun RecipesScreen(
             }
         }
     }
-}
-
-@Composable
-fun isLandscape(): Boolean {
-    val configuration = androidx.compose.ui.platform.LocalConfiguration.current
-    return configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
 }

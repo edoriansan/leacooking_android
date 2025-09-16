@@ -26,7 +26,7 @@ import androidx.navigation.NavController
 import com.android.leacooking.ui.Screen
 import com.android.leacooking.ui.home.components.CatLoadingSpinner
 import com.android.leacooking.ui.shared.imageCard.ImageCard
-import com.android.leacooking.ui.recipes.isLandscape
+import com.android.leacooking.ui.utils.isLandscape
 import kotlin.collections.chunked
 
 @Composable

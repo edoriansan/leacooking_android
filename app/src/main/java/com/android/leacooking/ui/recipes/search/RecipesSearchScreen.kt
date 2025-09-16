@@ -1,6 +1,5 @@
 package com.android.leacooking.ui.recipes.search
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -8,9 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -19,8 +16,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.android.leacooking.R
 import com.android.leacooking.ui.Screen
-import com.android.leacooking.ui.recipes.isLandscape
 import com.android.leacooking.ui.shared.imageCard.ImageCard
+import com.android.leacooking.ui.utils.isLandscape
 
 @Composable
 fun RecipesSearchScreen(

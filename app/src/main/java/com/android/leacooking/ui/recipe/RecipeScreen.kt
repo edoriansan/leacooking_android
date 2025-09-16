@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import com.android.leacooking.ui.theme.customFontFamily
+import com.android.leacooking.ui.utils.isLandscape
 import kotlin.collections.forEach
 
 @Composable
@@ -37,7 +38,6 @@ fun RecipeScreen(
 
     val recipe by viewModel.recipe.collectAsStateWithLifecycle()
     val isLandscape = isLandscape()
-    val columns = if (isLandscape) 2 else 1
 
     Column(
         modifier = modifier.fillMaxSize()
@@ -277,10 +277,4 @@ fun TitleWithLine(text: String) {
             color = Color.Gray
         )
     }
-}
-
-@Composable
-fun isLandscape(): Boolean {
-    val configuration = androidx.compose.ui.platform.LocalConfiguration.current
-    return configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
 }
