@@ -245,6 +245,7 @@ fun RecipeScreen(
                     ) {
                         Text(
                             text = recipe.recipe.description,
+                            fontFamily = customFontFamily,
                             modifier = Modifier.padding(end = 8.dp)
                         )
                     }

@@ -22,7 +22,7 @@ import coil.compose.SubcomposeAsyncImageContent
 import com.android.leacooking.ui.theme.customFontFamily
 
 @Composable
-fun ImageCard(imageUrl: String?, label: String, modifier: Modifier, fontSize: TextUnit = 20.sp) {
+fun ImageCard(imageUrl: String?, label: String, modifier: Modifier, fontSize: TextUnit = 30.sp) {
     Card(
         modifier = modifier.shadow(8.dp),
         shape = MaterialTheme.shapes.medium,
