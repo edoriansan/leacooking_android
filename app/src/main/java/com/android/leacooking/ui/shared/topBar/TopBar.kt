@@ -19,22 +19,10 @@ import coil.compose.AsyncImage
 @Composable
 fun TopBar(
     onSearchClick: () -> Unit,
-    onHomeClick: () -> Unit,
-    canGoBack: Boolean,
-    onBackClick: () -> Unit
+    onHomeClick: () -> Unit
 ) {
     TopAppBar(
         modifier = Modifier.shadow(8.dp),
-        navigationIcon = {
-            if (canGoBack) {
-                IconButton(onClick = onBackClick) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                        contentDescription = "Retour"
-                    )
-                }
-            }
-        },
         title = {
             Box(
                 modifier = Modifier
