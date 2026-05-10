@@ -3,7 +3,6 @@ package com.android.leacooking.ui.recipe
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.HorizontalDivider
@@ -97,7 +96,8 @@ fun RecipeScreen(
                         ) {
                             Text(
                                 text = recipe.recipe.parts.toString(),
-                                modifier = Modifier.padding(end = 8.dp)
+                                modifier = Modifier.padding(end = 8.dp),
+                                fontFamily = customFontFamily
                             )
                             Icon(
                                 imageVector = Icons.Default.Person,
@@ -140,7 +140,7 @@ fun RecipeScreen(
                         Row(
                             horizontalArrangement = Arrangement.Start,
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(16.dp).fillMaxWidth()
+                            modifier = Modifier.padding(32.dp, 8.dp)
                         ) {
                             Text(
                                 text = recipe.recipe.description,
@@ -198,7 +198,9 @@ fun RecipeScreen(
                     ) {
                         Text(
                             text = recipe.recipe.parts.toString(),
-                            modifier = Modifier.padding(end = 8.dp)
+                            modifier = Modifier.padding(end = 8.dp),
+                            fontFamily = customFontFamily,
+                            fontSize = 18.sp,
                         )
                         Icon(
                             imageVector = Icons.Default.Person,
@@ -241,11 +243,12 @@ fun RecipeScreen(
                     Row(
                         horizontalArrangement = Arrangement.Start,
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(16.dp).fillMaxWidth()
+                        modifier = Modifier.padding(32.dp, 8.dp)
                     ) {
                         Text(
                             text = recipe.recipe.description,
                             fontFamily = customFontFamily,
+                            fontSize = 18.sp,
                             modifier = Modifier.padding(end = 8.dp)
                         )
                     }
