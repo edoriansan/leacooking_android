@@ -61,9 +61,7 @@ fun MainNavigation() {
                     navController.navigate(Screen.HOME.route) {
                         popUpTo(Screen.HOME.route) { inclusive = true }
                     }
-                },
-                canGoBack = navController.previousBackStackEntry != null,
-                onBackClick = { navController.popBackStack() }
+                }
             )
         }
     ) { innerPadding ->
@@ -80,21 +78,24 @@ fun MainNavigation() {
                 route = "${Screen.SUBCATEGORIES.route}/{categoryId}",
                 arguments = listOf(navArgument("categoryId") { type = NavType.LongType })
             ) { backStackEntry ->
-                val categoryId = backStackEntry.arguments?.getLong("categoryId") ?: 1
+                val categoryId = backStackEntry.arguments?.getLong("categoryId")
+                    ?: error("categoryId manquant")
                 SubCategoriesScreen(categoryId = categoryId, navController = navController)
             }
 
             composable("${Screen.RECIPES.route}/{recipeSubcategoryId}",
                 arguments = listOf(navArgument("recipeSubcategoryId") { type = NavType.LongType })
             ) { backStackEntry ->
-                val recipeSubcategoryId = backStackEntry.arguments?.getLong("recipeSubcategoryId") ?: 1L
+                val recipeSubcategoryId = backStackEntry.arguments?.getLong("recipeSubcategoryId")
+                    ?: error("recipeSubcategoryId manquant")
                 RecipesScreen(recipeSubcategoryId = recipeSubcategoryId, navController = navController)
             }
 
             composable("${Screen.RECIPE.route}/{recipeId}",
                 arguments = listOf(navArgument("recipeId") { type = NavType.LongType })
             ) { backStackEntry ->
-                val recipeId = backStackEntry.arguments?.getLong("recipeId") ?: 1L
+                val recipeId = backStackEntry.arguments?.getLong("recipeId")
+                    ?: error("recipeId manquant")
                 RecipeScreen(recipeId = recipeId)
             }
 

@@ -15,7 +15,7 @@ data class Recipe(
     val parts: Int?,
 
     @ColumnInfo(name = "image_url")
-    val recipeImg: String,
+    val recipeImg: String?,
 
     @ColumnInfo(name = "description")
     val description: String,
