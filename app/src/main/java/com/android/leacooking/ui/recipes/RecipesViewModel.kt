@@ -17,14 +17,21 @@ import javax.inject.Inject
 class RecipesViewModel @Inject constructor(
     private val recipeDao: RecipeDao
 ) : ViewModel() {
+
     private val _recipes = MutableStateFlow<List<RecipePreview>>(emptyList())
-    val recipes: StateFlow<List<RecipePreview>> get() = _recipes.asStateFlow()
+    val recipes: StateFlow<List<RecipePreview>> = _recipes.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     fun loadRecipes(recipeSubcategoryId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = recipeDao.getRecipesBySubcategoryId(recipeSubcategoryId)
-            withContext(Dispatchers.Main) {
+            _isLoading.value = true
+            try {
+                val result = recipeDao.getRecipesBySubcategoryId(recipeSubcategoryId)
                 _recipes.value = result
+            } finally {
+                _isLoading.value = false
             }
         }
     }

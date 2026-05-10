@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,13 +18,19 @@ class RecipeSearchViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _searchResults = MutableStateFlow<List<RecipePreview>>(emptyList())
-    val searchResults: StateFlow<List<RecipePreview>> get() = _searchResults.asStateFlow()
+    val searchResults: StateFlow<List<RecipePreview>> = _searchResults.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     fun searchRecipes(query: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = recipeDao.searchRecipesByIngredient(query)
-            withContext(Dispatchers.Main) {
+            _isLoading.value = true
+            try {
+                val result = recipeDao.searchRecipesByIngredient(query)
                 _searchResults.value = result
+            } finally {
+                _isLoading.value = false
             }
         }
     }

@@ -78,7 +78,7 @@ class SynchronizationRepository @Inject constructor(
                 val recipeIngredientEntities = recipesFromApi.flatMap { recipe ->
                     recipe.recipeIngredients.map { RecipeIngredientMapper.mapTo(it) }
                 }
-                recipeDao.insertRecipesWithPartsAndIngredients(recipeEntities, recipeIngredientEntities)
+                recipeDao.insertRecipeIngredients(recipeEntities, recipeIngredientEntities)
                 Log.d("Sync", "Recipes sync: ${recipesFromApi.size} recipes")
             } else {
                 Log.e("Sync", "Failed to sync recipes: HTTP ${response.code()} - ${response.message()}")

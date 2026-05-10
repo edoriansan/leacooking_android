@@ -3,7 +3,6 @@ package com.android.leacooking.ui.recipe
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.HorizontalDivider
@@ -23,6 +22,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import com.android.leacooking.ui.theme.customFontFamily
+import com.android.leacooking.ui.utils.isLandscape
 import kotlin.collections.forEach
 
 @Composable
@@ -37,7 +37,6 @@ fun RecipeScreen(
 
     val recipe by viewModel.recipe.collectAsStateWithLifecycle()
     val isLandscape = isLandscape()
-    val columns = if (isLandscape) 2 else 1
 
     Column(
         modifier = modifier.fillMaxSize()
@@ -97,7 +96,8 @@ fun RecipeScreen(
                         ) {
                             Text(
                                 text = recipe.recipe.parts.toString(),
-                                modifier = Modifier.padding(end = 8.dp)
+                                modifier = Modifier.padding(end = 8.dp),
+                                fontFamily = customFontFamily
                             )
                             Icon(
                                 imageVector = Icons.Default.Person,
@@ -140,10 +140,11 @@ fun RecipeScreen(
                         Row(
                             horizontalArrangement = Arrangement.Start,
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(16.dp).fillMaxWidth()
+                            modifier = Modifier.padding(32.dp, 8.dp)
                         ) {
                             Text(
                                 text = recipe.recipe.description,
+                                fontFamily = customFontFamily,
                                 modifier = Modifier.padding(end = 8.dp)
                             )
                         }
@@ -197,7 +198,9 @@ fun RecipeScreen(
                     ) {
                         Text(
                             text = recipe.recipe.parts.toString(),
-                            modifier = Modifier.padding(end = 8.dp)
+                            modifier = Modifier.padding(end = 8.dp),
+                            fontFamily = customFontFamily,
+                            fontSize = 18.sp,
                         )
                         Icon(
                             imageVector = Icons.Default.Person,
@@ -240,10 +243,12 @@ fun RecipeScreen(
                     Row(
                         horizontalArrangement = Arrangement.Start,
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(16.dp).fillMaxWidth()
+                        modifier = Modifier.padding(32.dp, 8.dp)
                     ) {
                         Text(
                             text = recipe.recipe.description,
+                            fontFamily = customFontFamily,
+                            fontSize = 18.sp,
                             modifier = Modifier.padding(end = 8.dp)
                         )
                     }
@@ -277,10 +282,4 @@ fun TitleWithLine(text: String) {
             color = Color.Gray
         )
     }
-}
-
-@Composable
-fun isLandscape(): Boolean {
-    val configuration = androidx.compose.ui.platform.LocalConfiguration.current
-    return configuration.orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE
 }
